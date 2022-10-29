@@ -51,7 +51,7 @@
 	</bean>
 
 	<bean id="facesUtil" class="br.com.bolaoCopaDoMundo.util.FacesUtil" />
-	 <bean id="relatorioUtil" class="br.com.bolaoCopaDoMundo.util.RelatorioUtil" /> 
+	<bean id="relatorioUtil" class="br.com.bolaoCopaDoMundo.util.RelatorioUtil" /> 
 
     <!-- View scope -->
     <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
