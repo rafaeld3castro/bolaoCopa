@@ -1,0 +1,423 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+	  xmlns:sec="http://www.springframework.org/security/facelets/tags" >
+
+<f:view>
+	<h:form>
+
+	<h2 class="dn">Menu Principal</h2>
+
+	<ul>
+
+		<!-- MENU TABELAS -->
+		<li>
+		<a href="#" title="">Tabelas</a>
+		<ul class="sub-menu">
+
+
+				<li class="third-menu">
+		            <a href="#" title="" >
+		                Ocupação
+		            </a>
+		            <ul class="sub-sub-menu">
+
+							<li>
+								<a href="/sca/paginas/tabelas/especialidadeCargoList.faces">
+								Especialidade do Cargo
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/tabelas/cargoList.faces">
+								Cargo
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/tabelas/classeReferenciaList.faces">
+								Classe e Referência do Cargo
+								</a>
+							</li>
+
+		            </ul>
+		        </li>
+
+
+				<li class="third-menu">
+					<a href="#" title="" >
+			        Representação
+					</a>
+					<ul class="sub-sub-menu">
+	
+							<li>
+								<a href="/sca/paginas/cadastros/representacaoSetorList.faces">
+								Cargo por Setor
+								</a>
+							</li>
+						
+							<li>
+								<a href="/sca/paginas/cadastros/representacaoValorList.faces">
+								Cargo por Valor
+								</a>
+							</li>
+						
+
+					</ul>
+				</li>
+
+
+				<li class="third-menu">
+		            <a href="#" title="" >
+		                Competência
+		            </a>
+		            <ul class="sub-sub-menu">
+	
+							<li>
+								<a href="/sca/paginas/tabelas/competenciaFuncionalList.faces">
+								Competência Funcional
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/tabelas/areaSetorList.faces">
+								Área de Competência do Setor
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/tabelas/areaSetorCompetenciaList.faces">
+								Competência do Setor
+								</a>
+							</li>
+
+		            </ul>
+		        </li>
+
+
+
+				<li class="third-menu">
+		            <a href="#" title="" >
+		                Dependentes
+		            </a>
+		            <ul class="sub-sub-menu">
+
+							<li>
+								<a href="/sca/paginas/tabelas/tipoDependenciaList.faces">
+								Tipo
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/tabelas/motivoDependenciaList.faces">
+								Motivo de Dependência
+								</a>
+							</li>
+						
+	
+		            </ul>
+		        </li>
+
+				<li>
+					<a href="/sca/paginas/tabelas/escolaridadeList.faces">
+					Escolaridade
+					</a>
+				</li>
+
+				<li>
+					<a href="/sca/paginas/tabelas/instituicaoList.faces">
+					Instituição
+					</a>
+				</li>
+
+				<li class="third-menu">
+		            <a href="#" title="" >
+		                Formação Acadêmica
+		            </a>
+		            <ul class="sub-sub-menu">
+
+							<li>
+								<a href="/sca/paginas/tabelas/areaAcademicaList.faces">
+								Área
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/tabelas/cursoAcademicaList.faces">
+								Cursos
+								</a>
+							</li>
+
+		            </ul>
+		        </li>
+
+				<li class="third-menu">
+		            <a href="#" title="" >
+		                Formação Profissional
+		            </a>
+		            <ul class="sub-sub-menu">
+
+							<li>
+								<a href="/sca/paginas/tabelas/areaProfissionalList.faces">
+								Área
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/tabelas/cursoProfissionalList.faces">
+								Cursos
+								</a>
+							</li>						
+	
+		            </ul>
+		        </li>
+
+				<li class="third-menu">
+		            <a href="#" title="" >
+		                Funcional
+		            </a>
+		            <ul class="sub-sub-menu">
+	
+							<li>
+								<a href="/sca/paginas/tabelas/tipoBeneficioList.faces">
+								Tipo de Benefício
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/tabelas/tipoLicencaList.faces">
+								Tipo de Licença
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/tabelas/tipoMovimentoList.faces">
+								Tipo de Movimento
+								</a>
+							</li>
+	
+		            </ul>
+		        </li>
+
+				<li class="third-menu">
+		            <a href="#" title="" >
+		                Folha
+		            </a>
+		            <ul class="sub-sub-menu">
+	
+							<li>
+								<a href="/sca/paginas/tabelas/tipoFolhaList.faces">
+								Tipo de Folha
+								</a>
+							</li>
+						
+							<li>
+								<a href="/sca/paginas/tabelas/rubricaList.faces">
+								Rubrica
+								</a>
+							</li>
+						
+	
+		            </ul>
+		        </li>
+
+				<li class="third-menu">
+		            <a href="#" title="" >
+		                Pessoal
+		            </a>
+		            <ul class="sub-sub-menu">
+	
+							<li>
+								<a href="/sca/paginas/tabelas/estadoCivilList.faces">
+								Estado Civil
+								</a>
+							</li>
+						
+							<li>
+								<a href="/sca/paginas/tabelas/tipoBiotipoList.faces">
+								Biotipo Humano
+								</a>
+							</li>
+						
+	
+		            </ul>
+		        </li>
+
+				<li>
+					<a href="/sca/paginas/tabelas/tipoDocumentoList.faces">
+					Tipo Documento
+					</a>
+				</li>
+			
+
+		</ul>
+		</li>
+
+
+
+		<!-- MENU CADASTROS -->
+		<li>
+		<a href="#" title="">Cadastros</a>
+		<ul class="sub-menu">
+
+			<li class="third-menu">
+				<a href="#" title="" >
+		        Pessoal
+				</a>
+				<ul class="sub-sub-menu">
+
+					<li>
+						<a href="/sca/paginas/cadastros/pessoaList.faces">
+						Dados Cadastrais
+						</a>
+					</li>
+
+					<li>
+						<a href="/sca/paginas/cadastros/pessoaCursoProfissionalList.faces">
+						Cursos Profissionais
+						</a>
+					</li>
+		
+					<li>
+						<a href="/sca/paginas/cadastros/pessoaCursoGraduacaoList.faces">
+						Curso de Graduação
+						</a>
+					</li>
+					
+				</ul>
+			</li>
+
+			<li>
+				<a href="#" onclick="alert('Em Desenvolvimento');">
+				Competência
+				</a>
+			</li>
+
+			<li>
+				<a href="/sca/paginas/cadastros/publicacaoList.faces">
+				Publicação
+				</a>
+			</li>
+
+		</ul>
+        </li>
+
+		
+
+		<!-- MENU FUNCIONAL -->
+		<li>
+		<a href="#" title="">Funcional</a>
+		<ul class="sub-menu">
+
+				<li>
+					<a href="#" onclick="alert('Em Desenvolvimento')">
+					Nomeação
+					</a>
+				</li>
+
+				<li>
+					<a href="#" onclick="alert('Em Desenvolvimento')">
+					Progressão Funcional
+					</a>
+				</li>
+
+				<li>
+					<a href="#" onclick="alert('Em Desenvolvimento')">
+					Reclassificação
+					</a>
+				</li>
+
+				<li>
+					<a href="#" onclick="alert('Em Desenvolvimento')">
+					Representação Funcional
+					</a>
+				</li>
+
+				<li>
+					<a href="#" onclick="alert('Em Desenvolvimento')">
+					Representação Funcional
+					</a>
+				</li>
+
+				<li>
+					<a href="#" onclick="alert('Em Desenvolvimento')">
+					Exoneração
+					</a>
+				</li>
+
+				<li>
+					<a href="#" onclick="alert('Em Desenvolvimento');">
+					Área do Setor
+					</a>
+				</li>
+
+				<li>
+					<a href="/sca/paginas/funcional/funcionalSetorList.faces">
+					Lotação
+					</a>
+				</li>
+
+				<li class="third-menu">
+					<a href="#" title="" >
+			        Licença
+					</a>
+					<ul class="sub-sub-menu">
+
+							<li>
+								<a href="/sca/paginas/funcional/licencaEspecialList.faces">
+								Reconhecer Direito a Licença Especial
+								</a>
+							</li>
+
+							<li>
+								<a href="/sca/paginas/cadastros/representacaoValorList.faces">
+								Lançar Periodo de Licença
+								</a>
+							</li>
+
+					</ul>
+				</li>
+
+				<li>
+					<a href="#" onclick="alert('Em Desenvolvimento')">
+					Férias
+					</a>
+				</li>
+
+		</ul>
+		</li>
+
+
+		
+
+
+		<!-- MENU CONSULTA -->
+		<li>
+		<a href="#" title="">Consulta</a>
+
+		</li>
+
+
+
+
+
+		<!-- MENU RELATORIO -->
+		<li>
+		<a href="#" title="">Relatório</a>
+
+		</li>
+		
+		<li>
+				<a href="/sca/paginas/relatorios/emitirDocieServidor.faces">
+							Emitir Dossiê do Servidor
+								</a>
+							</li>
+
+
+	</ul>
+
+	</h:form>
+</f:view>
+</html>

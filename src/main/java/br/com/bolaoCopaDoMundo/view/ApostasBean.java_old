@@ -1,0 +1,247 @@
+package br.com.bolaoCopaDoMundo.view;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.persistence.PersistenceException;
+
+import org.apache.log4j.Logger;
+import org.hibernate.JDBCException;
+import org.primefaces.event.CellEditEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import br.com.bolaoCopaDoMundo.domain.Apostas;
+import br.com.bolaoCopaDoMundo.domain.Jogos;
+import br.com.bolaoCopaDoMundo.domain.Participante;
+import br.com.bolaoCopaDoMundo.exception.BolaoCopaDoMundoRuntimeException;
+import br.com.bolaoCopaDoMundo.service.ApostasService;
+import br.com.bolaoCopaDoMundo.service.JogosService;
+import br.com.bolaoCopaDoMundo.service.ParticipanteService;
+import br.com.bolaoCopaDoMundo.util.FacesUtil;
+
+@Component("apostasBean")
+@Scope("view")
+public class ApostasBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	static Logger logger = Logger.getLogger(ApostasBean.class);
+
+	@Autowired
+	private JogosService jogosService;
+
+	@Autowired
+	private ApostasService apostasService;
+
+	@Autowired
+	private LoginBean loginBean;
+
+	@Autowired
+	private ParticipanteService participanteService;
+
+	// entidades das telas
+	private List<Jogos> jogos;
+	private List<Apostas> apostas;
+	private String usuario = FacesUtil.getName();
+	private Participante participante;
+	private Apostas aposta;
+	private Long apostasGolNull;
+
+	@PostConstruct
+	public void init() {
+
+		participante = participanteService.findByUsername(usuario);
+
+		apostas = apostasService.findByUsername(usuario);
+		for (Apostas a : apostas) {
+			if (a.getGol1() != null)
+				a.setGol1t(a.getGol1().toString());
+			if (a.getGol2() != null)
+				a.setGol2t(a.getGol2().toString());
+		}
+
+		if (apostas.size() == 0) {
+			apostas.clear();
+
+			jogos = jogosService.findAll();
+
+			for (Jogos j : jogos) {
+				aposta = new Apostas();
+				aposta.setParticipante(participante);
+				aposta.setJogos(j);
+				if (aposta.getGol1() != null)
+					aposta.setGol1t(aposta.getGol1().toString());
+				if (aposta.getGol2() != null)
+					aposta.setGol2t(aposta.getGol2().toString());
+				apostas.add(aposta);
+			}
+			participante.setApostas(apostas);
+
+			participanteService.salvar(participante);
+		}
+
+		apostasGolNull = apostasService
+				.countByParticipanteAndGolNull(participante);
+		System.out.println(apostasGolNull);
+
+		FacesUtil.addWarnMessageWithouDetail("Existem "
+				+ apostasGolNull.toString() + " apostas incompletas!");
+	}
+
+	public List<Jogos> getJogos() {
+		return jogos;
+	}
+
+	public void setJogos(List<Jogos> jogos) {
+		this.jogos = jogos;
+	}
+
+	public List<Apostas> getApostas() {
+		return apostas;
+	}
+
+	public void setApostas(List<Apostas> apostas) {
+		this.apostas = apostas;
+	}
+
+	public Participante getParticipante() {
+		return participante;
+	}
+
+	public void setParticipante(Participante participante) {
+		this.participante = participante;
+	}
+
+	public Apostas getAposta() {
+		return aposta;
+	}
+
+	public void setAposta(Apostas aposta) {
+		this.aposta = aposta;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public Long getApostasGolNull() {
+		return apostasGolNull;
+	}
+
+	public void setApostasGolNull(Long apostasGolNull) {
+		this.apostasGolNull = apostasGolNull;
+	}
+
+	public void onCellEdit(CellEditEvent event) {
+
+		Apostas apostaAtualizar = FacesUtil.getApplication()
+				.evaluateExpressionGet(FacesUtil.getFacesContext(), "#{item}",
+						Apostas.class);
+
+		if (apostaAtualizar.getGol1t() == null
+				|| apostaAtualizar.getGol1t().equals("")) {
+			apostaAtualizar.setGol1(null);
+		} else {
+			apostaAtualizar
+					.setGol1(Integer.parseInt(apostaAtualizar.getGol1t()));
+		}
+
+		if (apostaAtualizar.getGol2t() == null
+				|| apostaAtualizar.getGol2t().equals("")) {
+			apostaAtualizar.setGol2(null);
+		} else {
+			apostaAtualizar
+					.setGol2(Integer.parseInt(apostaAtualizar.getGol2t()));
+		}
+
+		try {
+			apostasService.salvar(apostaAtualizar);
+
+			apostasGolNull = apostasService
+					.countByParticipanteAndGolNull(participante);
+			FacesUtil.addWarnMessageWithouDetail("Existem "
+					+ apostasGolNull.toString() + " apostas incompletas!");
+
+			FacesUtil
+					.addInfoMessageWithouDetail("Opera��o realizada com sucesso. Resultado da aposta foi gravado.");
+
+			if (apostaAtualizar.getGol1() != null
+					&& apostaAtualizar.getGol2() != null) {
+
+				FacesUtil.addInfoDetail(apostaAtualizar.getJogos().getGrupo()
+						.getNome()
+						+ " | "
+						+ new SimpleDateFormat("dd/MM/yyyy")
+								.format(apostaAtualizar.getJogos().getDtJogo())
+						+ " | "
+						+ apostaAtualizar.getJogos().getSelecao1().getNome()
+						+ " "
+						+ apostaAtualizar.getGol1()
+						+ " x "
+						+ +apostaAtualizar.getGol2()
+						+ " "
+						+ apostaAtualizar.getJogos().getSelecao2().getNome()
+						+ ".");
+
+			} else if (apostaAtualizar.getGol1() != null) {
+
+				FacesUtil.addInfoDetail(apostaAtualizar.getJogos().getGrupo()
+						.getNome()
+						+ " | "
+						+ new SimpleDateFormat("dd/MM/yyyy")
+								.format(apostaAtualizar.getJogos().getDtJogo())
+						+ " | "
+						+ apostaAtualizar.getJogos().getSelecao1().getNome()
+						+ " "
+						+ apostaAtualizar.getGol1()
+						+ ". Preencha o campo da sele��o "
+						+ apostaAtualizar.getJogos().getSelecao2().getNome());
+
+			} else if (apostaAtualizar.getGol2() != null) {
+
+				FacesUtil.addInfoDetail(apostaAtualizar.getJogos().getGrupo()
+						.getNome()
+						+ " | "
+						+ new SimpleDateFormat("dd/MM/yyyy")
+								.format(apostaAtualizar.getJogos().getDtJogo())
+						+ " | "
+						+ apostaAtualizar.getJogos().getSelecao2().getNome()
+						+ " "
+						+ apostaAtualizar.getGol2()
+						+ ". Preencha o campo da sele��o "
+						+ apostaAtualizar.getJogos().getSelecao1().getNome());
+			} else {
+				FacesUtil.addInfoDetail("Preencha os campos das sele��es "
+						+ apostaAtualizar.getJogos().getSelecao1().getNome()
+						+ " e "
+						+ apostaAtualizar.getJogos().getSelecao2().getNome());
+			}
+			logger.info("Operacao realizada com sucesso.");
+		} catch (BolaoCopaDoMundoRuntimeException e) {
+			FacesUtil.addErroMessage("Ocorreu o seguinte erro: "
+					+ e.getMessage());
+			logger.warn("Ocorreu o seguinte erro: " + e.getMessage());
+		} catch (PersistenceException e) {
+			FacesUtil
+					.addErroMessage("Ocorreu algum erro ao salvar. Opera��o cancelada.");
+			logger.fatal("Ocorreu o seguinte erro: " + e.getMessage());
+		} catch (JDBCException e) {
+			FacesUtil
+					.addErroMessage("Ocorreu algum erro ao salvar. Opera��o cancelada.");
+			logger.fatal("Ocorreu o seguinte erro: " + e.getMessage());
+		} catch (Exception e) {
+			FacesUtil
+					.addErroMessage("Ocorreu algum erro ao salvar. Opera��o cancelada.");
+			logger.fatal("Ocorreu o seguinte erro: " + e.getMessage());
+		}
+
+	}
+
+}

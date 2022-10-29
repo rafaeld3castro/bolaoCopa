@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+xmlns:p="http://primefaces.org/ui">
+	
+	<h:head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>BCM - Bolão da Copa do Mundo</title>
+        <link rel="stylesheet" type="text/css" media="all" href="css/geral.css" />
+        <link rel="shortcut icon" href="/bolaoCopaDoMundo/ico.png" />
+
+	</h:head>
+	
+	<h:body>
+    	<f:view>
+    	<div class="topo">
+		<div class="container p-3">
+			<div class="row">
+				<div class="col-md-4 offset-md-3">
+					<span class="titulo">BOLÃO COPA DO<br /> MUNDO 2018</span><br /><br />
+				</div>
+
+				<div class="col-3">
+					<!--  <p:graphicImage url="../img/mascote.png" styleClass="img-fluid" /> -->
+					<p:graphicImage url="img/logo-copa-vertical.png" styleClass="img-fluid" />
+				</div>
+			</div>
+		</div>         
+    </div>
+	        <div class="container container-login">
+	        	<div class="row">
+		        	<div class="col-md-6 offset-md-3 login-corpo">
+						<ui:insert name="content">
+							conteudo da pagina!!!
+						</ui:insert>
+						
+					</div>
+				</div>
+	        </div>
+		</f:view>
+	</h:body>
+
+</html>

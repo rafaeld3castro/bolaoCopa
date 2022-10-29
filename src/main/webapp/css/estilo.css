@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*Padrão de fontes*/
+h1				{ font-size:20px; font-weight:bold; color:#FFF; }
+h2				{ font-size:16px; color:#000; font-weight:normal; }
+h3				{ font-size:14px; color:#FFCC33; }
+.cinza			{ color:#CCCCCC; }
+.linha			{ width:90%; height:1px; margin-left:50px; border-bottom:#CCCCCC dotted 1px;}
+.float_left     { float:left;  display: inline; }
+.float_right    { float:right; display: inline; }
+.clear		    { clear:both;  font-size:0px; }
+
+html,body{ margin:0 auto; height:100%;}
+.alturaMinima   { min-height:380px; height:380px; } /* All Browser's */
+html>body .alturaMinima{ height: auto; }/* Hack IE */
+
+
+
+#tudo{ margin:0 auto; min-height:100%; min-width: 960px;   min-height: 55em; margin:0 auto;}
+
+#cabecalho{ background-color:#CCC; width:100%;  height:200px; float:left; border:none; }
+
+#corpo{ background-color:#CCC; min-width: 965px ; min-height:100%; float:left; border:none; margin-top:1px; }
+
+/*Aqui começa a caixa que guarda os formulários*/
+.foto{ background-image:url(../img/foto_02.png); background-repeat:no-repeat; width:136px; height:200px; border:1px solid #CCC; float:right; margin-top:0px;}
+
+#cadastro_de_pessoa{ background-color:#333; width:100%; height:50px;; float:left; border:none; margin-top:1px; }
+
+#formulario{ width:960px; height:1435px;    border:none; margin-top:1px;  }
+
+.campo { float: left; margin: 2px 15px 5px 2px; }
+
+fieldset{ -moz-border-radius:5px; -webkit-border-radius:5px; padding:25px;}
+fieldset #check{ -moz-border-radius:5px; -webkit-border-radius:5px; padding:2px; width:185px; margin-top:16px;}
+fieldset #check1{ -moz-border-radius:5px; -webkit-border-radius:5px; padding:2px; width:450px; margin-top:16px;}
+fieldset #check2{ -moz-border-radius:5px; -webkit-border-radius:5px; padding:2px; min-width:155px; margin-top:19px;}
+fieldset #check3{ -moz-border-radius:5px; -webkit-border-radius:5px; padding:2px; width:270px; margin-top:19px;}
+
+/*Formatação dos estilos*/
+form input#estilo{ 	width:150px; height:20px; color:#666666; margin-top:-10px; float:left; }
+form select#estilo{ 	width:100px; height:25px; color:#666666; margin-top:-10px; float:left;}
+form select#estilo1{ 	width:50px; height:25px; color:#666666; margin-top:-10px; float:left;}
+form select#estilo2{ 	width:200px; height:25px; color:#666666; margin-top:-10px; float:left;}
+form input#estilo{ 	width:50px; height:20px; color:#666666; margin-top:-10px; float:left;}
+form input#estilo1{ 	width:527px; height:20px; color:#666666; margin-top:-10px; float:left;}
+form input#estilo2{ 	width:250px; height:20px; color:#666666; margin-top:-10px; float:left;}
+form input#estilo3{ 	width:150px; height:20px; color:#666666; margin-top:-10px; float:left;}
+form input#estilo4{ 	width:200px; height:20px; color:#666666; margin-top:-10px; float:left;}
+form input#estilo5{ 	width:330px; height:20px; color:#666666; margin-top:-10px; float:left;}
+form input#estiloradio{ float:left;}
+form input#estiloradio1{ float:left; margin-left:10px;}
+
+/*Fim da Formatação dos estilos*/
+
+
+/*Aqui termina o guarda formulários*/
+
+#rodape{ background-color:#999; width:100%; height:200px;; float:left; border:none; position:relative;	bottom:0;  padding-bottom:20px; min-height:0; }
+
+   

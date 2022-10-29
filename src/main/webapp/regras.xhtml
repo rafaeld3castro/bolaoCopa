@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="WEB-INF/templates/login.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+ 	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+ 	  xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+	<ui:define name="content">
+
+				<h1>Regras</h1>
+				
+				<h4>Informações Gerais</h4>
+				<ol>
+					<li>Preço da Cartela R$ 80,00.</li>
+					<li>Cada Participante poderá fazer quantas cartelas quiser, porém apuradas isoladamente.</li>
+					<li>Prazo de cadastro das apostas vai até o dia 13/06/2018.</li>
+					<li>4. O apostador deve preencher seus palpites para todos os jogos da primeira fase, bem como, o primeiro e o segundo colocado de cada grupo. Caso não o faça, o mesmo não ganhará a pontuação dos palpites em branco.</li>
+				</ol>
+				<p class="text-danger">Obs.: A partir do dia 14 de junho,  todas as apostas estarão disponíveis para qualquer 
+				participante acessar, ou seja, todos poderão conferir o palpite dos participantes 
+				do bolão facilitando, dessa forma, um melhor acompanhamento. Você também 
+				receberá via email um PDF com todas as apostas dos participantes, garantindo a lisura do Bolão.</p>
+				
+				<h4>Premiação</h4>
+				<p>O valor do prêmio será o total arrecadado pago aos quatros primeiros colocados.</p>
+				<p>Serão considerados vencedores os quatros participantes que, ao 
+				final dos 48 jogos da primeira fase obtiverem melhor aproveitamento 
+				no sistema de pontuação do bolão (Pontos obtidos nos jogos e pontos obtidos na classificação de cada grupo). O prêmio será pago nas seguintes proporções:</p>
+				<ul>
+					<li>1º colocado: 60% do total arrecadado;</li>
+					<li>2º colocado: 25% do total arrecadado;</li>
+					<li>3º colocado: 10% do total arrecadado;</li>
+					<li>4º colocado: 5% do total arrecadado;</li>
+				</ul>
+				<p>Para acompanhar o resultado parcial do bolão o participante poderá 
+				utilizar a opção no menu Classificação. Ela será atualizada a cada partida.</p>
+				
+				<p class="text-danger">Obs.: Estamos providênciando a hospedagem da aplicação em um host pago, esse valor será subitraído do total apurado.</p>
+							
+				<h4>Critério de Desempate</h4>		
+				<p>Em caso de empate, os critérios a serem adotados serão os seguintes:</p>
+				<ul>
+					<li>1º critério: Maior numero de escores cheio;</li>
+					<li>2º critério: Maior numero de pontos em jogos do Brasil;</li>
+					<li>3º critério: Maior numero de acertos de 1º lugar de grupos;</li>
+					<li>4º critério: Sorteio. Por exemplo: Se dois participantes empatarem na segunda colocação, realiza-se um sorteio, quem ganhou fica com a segunda colocação e o que perdeu fica com a terceira.</li>
+				</ul>
+				
+				<h4>Pontuação</h4>
+				<p>Os pontos serão atribuídos às cartelas por cada jogo seguindo os critérios abaixo:</p>
+				<ol>
+					<li>
+						Escore em cheio ------------------------ 7 PONTOS
+						<p class="text-danger">Ex. Resultado do jogo 4x1 e sua aposta 4x1</p>
+					</li>
+					<li>
+						Escore de um dos times --------------- 2 PONTOS
+						<p class="text-danger">Ex. Resultado do jogo 3x2 e sua aposta 3x1 ou 1x2</p>
+					</li>
+					<li>
+						Acertar o vencedor --------------------- 2 PONTOS
+						<p class="text-danger">Ex. Resultado do jogo 3x2 e sua aposta 2x1</p>
+					</li>
+					<li>
+						Empate sem acertar o placar --------- 3 PONTOS
+						<p class="text-danger">Ex. Resultado do jogo 2x2 e sua aposta 3x3</p>
+					</li>
+					<li>
+						Os pontos dos itens "2" e "3" poderão ser acumulados.
+						<p class="text-danger">Ex. Resultado do jogo 3x0 e sua aposta 3x1, vc ganhará 4 pontos (2 por acetar o vencedor e 2 por acertar o escore de um dos times)</p>
+					</li>
+					<li>
+						Nos jogos do Brasil, os pontos terão um acréscimo de 50% do total obtido. Obs: Os pontos do grupo do Brasil não terão acréscimo , obdecerá o critério de pontuação dos grupos (7,8,9).
+						<p class="text-danger">Ex. Resultado do jogo 2x0 e sua aposta 2x1, você ganhará 6 pontos (4 pontos do jogo pelo critério 2 e 3, acrescido 2 pontos, 50% do total obtido, totalizando os 6 pontos.)</p>
+					</li>
+					<li>
+						1º do Grupo ------------------------------ 5 PONTOS
+						<p class="text-danger">Ex.  Resultado da classificação Brasil como o 1º do grupo e sua aposta foi Brasil como o 1º</p>
+					</li>
+					<li>
+						2º do Grupo ------------------------------ 2 PONTOS
+						<p class="text-danger">Ex. Resultado da classificação Brasil como o 2º do grupo e sua aposta foi Brasil como o 2º</p>
+					</li>
+					<li>
+						Acertar os 2 classificados no GRUPO na ordem inversa de classificação -------------------------- 2 PONTOS
+						<p class="text-danger">Ex.  Resultado da classificação Brasil como o 1º do grupo e México 
+								 como o 2º e sua aposta foi México como o 1º do grupo e Brasil como o 2º</p>
+					</li>
+				</ol>
+		
+						
+				<h4>Cadastro/Pagamento do Bolão</h4>
+				<p>Caso deseje participar do bolão, você deve se cadastrar através do link "Cadastre-se" na tela inicial e preencher todas as informações corretamente.  </p>
+				<p>Após a confirmação do pagamento você receberá um email informando a ativação do seu usuário. Só então você poderá se logar no sistema e cadastrar suas apostas.</p>
+				<p>Sobre o pagamento, o valor de R$ 80,00 deverá ser pago ao administrador do bolão, caso tenha dificuldade para efetuar o pagamento com o mesmo, entre em contato através do email bolaodacopabrasil@gmail.com ou pelo telefone: (85)87533736</p>
+						
+				<hr/>
+						
+				<h:form id="formulario" styleClass="text-center">
+					<sec:isAnonymous>
+						<p:button id="voltar"
+											 value="Voltar"
+											 outcome="login"
+											 styleClass="btn btn-sm btn-copa"
+											 />
+						 
+						 <p:commandButton id="relatorio"
+											 value="Imprimir Tabela Jogos"
+											 actionListener="#{jogosListBean.relatorio}" 
+											 styleClass="btn btn-sm btn-copa"
+											 ajax="false"
+											 />
+					</sec:isAnonymous>
+					
+					<sec:isAuthenticated>
+						<p:button id="voltar"
+											 value="Voltar"
+											 outcome="home"
+											 styleClass="fr mg-bottom-10"
+											 />
+					</sec:isAuthenticated>
+				</h:form>
+
+	</ui:define>
+</ui:composition>

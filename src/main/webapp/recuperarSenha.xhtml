@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="WEB-INF/templates/login.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="content">
+		<h1>Recuperar senha</h1>
+
+		<h:form id="formulario" styleClass="">
+			<p:messages autoUpdate="true" errorClass="errorMessage" />
+
+			<div>
+				<h:outputText>Para continuar com a recuperação de senha você precisa preencher os dados abaixo.</h:outputText>
+			</div>
+
+			<p>Para continuar com a recuperação de senha você precisa preencher os dados abaixo.</p>
+			
+			<div class="form-row">
+   				<div class="col">
+					<label for="login">Login de cadastro*</label>
+					<p:inputText id="login"
+							value="#{participanteFormBean.recuperarSenhaLogin}"
+							required="true" requiredMessage="O login é obrigatório."
+							maxlength="30"
+							styleClass="form-control"/>
+				</div>
+
+				<div class="col">
+					<label for="email">E-mail de cadastro*</label>
+					<p:inputText id="email"
+							value="#{participanteFormBean.recuperarSehnaEmail}"
+							maxlength="50" required="true"
+							requiredMessage="O email é obrigatório."
+							styleClass="form-control"
+							type="email"/>
+				</div>
+			</div>
+
+			<hr />
+
+			<div class="form-row">
+				<div class="col text-center p-3">
+					<p:button id="voltar" value="Voltar" outcome="login" icon="fas fa-key"
+						styleClass="btn btn-sm btn-secondary float-left" />		
+		
+					<p:commandButton id="limpaTela" immediate="true" value="Limpar" icon="fas fa-key"
+						action="#{participanteFormBean.limpaTelaCadastro}"
+						update="formulario" styleClass="btn btn-sm btn-secondary float-left"
+						ajax="false" />
+						
+					<p:commandButton action="#{participanteFormBean.recuperarSenha}"
+						value="Confirmar" update="formulario"
+						styleClass="btn btn-sm btn-copa float-right" ajax="false" />	
+						
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="areasetor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="39aadf2a-f539-453a-b2f1-40c3edaa766c">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FILTRO" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BACK" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Program Files\\Java\\eclipse\\workspace\\srh\\WebContent\\img\\bg-topo.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Program Files\\Java\\eclipse\\workspace\\srh\\WebContent\\img\\logo-srh.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO_TCE" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Program Files\\Java\\eclipse\\workspace\\srh\\WebContent\\img\\logo-tce-report.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RESULTADO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+NOME as NMPARTICIPANTE,PONTOJOGOS,PONTOSCLASSIFICACAO,PONTOSBRASIL,ESCORECHEIO,TOTALPONTOS
+FROM
+pontuacao inner join participante on pontuacao.IDPARTICIPANTE = participante.IDPARTICIPANTE
+ORDER BY
+TOTALPONTOS desc, ESCORECHEIO desc, PONTOSBRASIL desc;]]>
+	</queryString>
+	<field name="NMPARTICIPANTE" class="java.lang.String"/>
+	<field name="PONTOJOGOS" class="java.lang.Integer"/>
+	<field name="PONTOSCLASSIFICACAO" class="java.lang.Integer"/>
+	<field name="PONTOSBRASIL" class="java.lang.Integer"/>
+	<field name="ESCORECHEIO" class="java.lang.Integer"/>
+	<field name="TOTALPONTOS" class="java.lang.Integer"/>
+	<variable name="CLASSIFIC" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{NMPARTICIPANTE}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="103">
+			<rectangle>
+				<reportElement x="1" y="82" width="554" height="16" forecolor="#CCCCCC" uuid="3d42abd1-3ba0-4ba2-b90f-e5a1f4e9b981"/>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="80" width="549" height="18" uuid="c06e4af5-5084-4fe0-859a-3b976ceb0289"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{RESULTADO}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="0" width="554" height="79" forecolor="#CCCCCC" uuid="795c2a56-052f-4fa5-8523-785d417e0a73"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="172" y="14" width="383" height="48" forecolor="#CC0000" uuid="1e72ea33-f8b4-4fc7-a217-c9ee2a42d30a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Classificação Geral do Bolão da Copa 2018]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="14" width="172" height="48" uuid="38ba047e-e861-45e2-8df4-e2eacc2a8305"/>
+				<imageExpression><![CDATA[$P{LOGO_TCE}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="0" width="552" height="18" backcolor="#3333FF" uuid="6ec4cbe3-b01f-4357-b571-68e444033bb9"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="59" y="0" width="223" height="18" forecolor="#FFFFFF" uuid="adf0dca5-e773-4846-ba15-a2ad30e06149"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="0" width="56" height="18" forecolor="#FFFFFF" uuid="59681976-99be-4fbd-a107-93a07b99988a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Class]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="0" width="55" height="18" forecolor="#FFFFFF" uuid="391ecb32-96a5-4cc6-9922-a587cbe3ffab"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pts]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="0" width="53" height="18" forecolor="#FFFFFF" uuid="f5068dd4-1640-42fc-a617-44a1ed899c11"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pt Jogos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="0" width="54" height="18" forecolor="#FFFFFF" uuid="c270b029-77c3-4cb2-b85d-aa767ca6c14d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Acertos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="62" height="18" forecolor="#FFFFFF" uuid="d4c97d0b-1ad8-4030-91df-f4e9f3b48ca2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pt Grupo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="506" y="0" width="47" height="18" forecolor="#FFFFFF" uuid="aaf0ebfa-3096-4c9e-8bbd-973bdd56f8ad"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pt Brasil]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-2" positionType="Float" stretchType="RelativeToBandHeight" x="2" y="2" width="554" height="16" forecolor="#EFEFEF" backcolor="#EFEFEF" uuid="98048543-4ba6-4481-a544-061c43b7f448">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="56" y="0" width="226" height="16" uuid="071ca32c-3fc1-4066-bc84-86bff5d265fe"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NMPARTICIPANTE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="390" y="0" width="62" height="18" uuid="d62e18e0-4de7-422b-a8f7-8a2218d21731"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PONTOSCLASSIFICACAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="282" y="0" width="55" height="16" uuid="962d9cf3-9d68-448b-80cb-1c099b936a2d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TOTALPONTOS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="337" y="1" width="53" height="16" uuid="2f5b2188-c200-4dc5-a2ad-7383a0143aa2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PONTOJOGOS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="506" y="2" width="46" height="16" uuid="095b2789-637e-42a7-a33a-ea3e06070c65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{PONTOSBRASIL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="452" y="0" width="54" height="18" uuid="2ba154c8-022b-4308-acaf-e4bd888df8b9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ESCORECHEIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="0" width="52" height="16" uuid="b49dfec9-ff6f-4bdb-bfe6-36651a61c046"/>
+				<textFieldExpression><![CDATA[$V{CLASSIFIC}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="2" width="554" height="1" uuid="3e670fea-9be3-46de-8e04-1c00da154c7b"/>
+			</line>
+			<staticText>
+				<reportElement x="107" y="3" width="366" height="16" uuid="3eb3a1ee-f92e-41ee-9e5a-5b17fb1c1c4d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[@Copyright - Bolão Copa do Mundo]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-5" x="531" y="3" width="25" height="16" uuid="3c733a7d-a95a-47c0-be00-5dfc37f5ad31"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-4" x="474" y="3" width="57" height="16" forecolor="#000000" uuid="d112fb9d-5064-4fa5-8776-13bacea57b60"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-5" x="3" y="3" width="100" height="16" forecolor="#000000" uuid="219cba3d-83be-4633-b372-974a3f387384"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

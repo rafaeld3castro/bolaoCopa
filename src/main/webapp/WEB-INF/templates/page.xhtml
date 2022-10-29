@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+    <h:head>
+   	<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/>
+        <title>BCM - Bolão da Copa do Mundo</title>
+        <link rel="stylesheet" type="text/css" media="all" href="/bolaoCopaDoMundo/css/geral.css" />
+        <link rel="shortcut icon" href="/bolaoCopaDoMundo/ico.png" />
+        <script type="text/javascript" src="/bolaoCopaDoMundo/js/jquery-3.3.1.min.js"/>
+        <script type="text/javascript" src="/bolaoCopaDoMundo/js/js-effects.js"></script>
+ 		<script type="text/javascript" src="/bolaoCopaDoMundo/js/jquery.maskedinput-1.3.js"></script>
+ 		
+ 		<script type="text/javascript" src="/bolaoCopaDoMundo/js/js-primefaces-calendar.js"></script> 
+        
+    </h:head>
+    <h:body>
+    	<f:view>	        
+			<ui:include src="topo.xhtml"/>					
+			
+			
+			<div class="container">
+				<ui:insert name="content">
+					conteudo da pagina!!!
+				</ui:insert>
+	
+				<footer>
+					<p>© Copyright 2018</p>
+				</footer>
+	        </div>
+	
+			<!-- Modal Loading -->
+	<!-- 		<rich:popupPanel id="panel_loading" autosized="true" >
+				<h:graphicImage url="/img/loading.gif" style="border:0px; vertical-align: middle;" />
+				<rich:spacer width="20" />
+				<center><h:outputText value="Aguarde..." /></center>
+			</rich:popupPanel> -->
+	
+			<!-- <a4j:status id="loading" onstart="Richfaces.showModalPanel('panel_loading')" onstop="Richfaces.hideModalPanel('panel_loading')" /> -->
+
+    	</f:view>
+
+    </h:body>
+    <script type="text/javascript" src="/bolaoCopaDoMundo/js/bootstrap.min.js"/>
+</html>

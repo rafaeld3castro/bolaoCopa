@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="../WEB-INF/templates/pageCadastro.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+ 	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="content">
+
+		<div class="titulo-pagina">
+			<h2>Cadastro de Novo Usuário</h2>
+		</div>
+		
+		<h:form id="formulario" styleClass="formularios">
+			<fieldset>
+			<p:messages autoUpdate="true" errorClass="errorMessage" />
+			
+			<div>
+				<div class="input-box box-50" style="float: none !important">
+					<label>Nome *</label>
+					<div class="conteiner">
+						<p:inputText id="nome"
+									 value="#{participanteFormBean.participante.nome}"
+									 required="true"
+									 requiredMessage="O nome é obrigatório"
+									 maxlength="150">
+									 
+							<!-- <f:validateLength maximum="150"/> -->
+						</p:inputText>
+					</div>
+				</div>
+				
+				<div class="input-box box-18" style=" float: none">
+					<label>Login *</label>
+					<div class="conteiner">
+						<p:inputText id="login"
+									 value="#{participanteFormBean.participante.username}"
+									 required="true"
+									 requiredMessage="O login é obrigatório."
+									 maxlength="30">
+							<!-- <f:validateLength maximum="30"/> -->
+						</p:inputText>
+					</div>
+				</div>
+				
+				<div class="input-box box-18" style=" float: none">
+					<label>Senha *</label>
+					<div class="conteiner">
+						<p:password id="senha"
+									value="#{participanteFormBean.participante.password}"
+									required="true"
+									requiredMessage="A senha é obrigatória."
+									maxlength="32"
+									/>
+							<!-- <f:validateLength maximum="32"/> -->
+					</div>
+				</div>
+				
+				<div class="input-box box-30" style="float: none !important">
+					<label>E-mail *</label>
+					<div class="conteiner">
+						<p:inputText id="email"
+									 value="#{participanteFormBean.participante.email}"
+									 maxlength="50"
+									 required="true"
+									 requiredMessage="O email é obrigatório."/>
+<!-- 							<f:validateLength maximum="50" /> -->
+					</div>
+				</div>
+				<div class="input-box box-18" style=" float: none">
+					<label>Contato *</label>
+					<div class="conteiner">
+						<p:inputText id="contato"
+									 value="#{participanteFormBean.participante.contato}"
+									 required="true"
+									 requiredMessage="O contato é obrigatório."
+									 maxlength="30">
+							<!-- <f:validateLength maximum="30"/> -->
+						</p:inputText>
+					</div>
+				</div>
+				
+				<div class="input-box box-18" style=" float: none">
+					<label>Telefone *</label>
+					<div class="conteiner">
+						<p:inputText id="telefone"
+									 value="#{participanteFormBean.participante.telefone}"
+									 required="true"
+									 requiredMessage="O contato é obrigatório."
+									 maxlength="30">
+							<!-- <f:validateLength maximum="30"/> -->
+						</p:inputText>
+					</div>
+				</div>		
+				
+<!-- 				<div class="checkbox-group"> -->
+<!-- 					<label>Ativo *</label> -->
+<!-- 					<div> -->
+<!--  						<p:selectBooleanCheckbox value="#{participanteFormBean.participante.ativo}"/> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				
+			</div>
+			
+		
+			</fieldset>
+			
+			<p:commandButton id="voltar"
+								 immediate="true"
+								 value="Voltar"
+								 action="#{participanteFormBean.limpaTelaCadastro}"
+								 styleClass="bt-padrao fr"
+								 />
+			
+			<p:commandButton action="#{participanteFormBean.salvarCadastro}" value="Salvar"  update="formulario" styleClass="bt-padrao fr" ajax="false"/>
+
+			<p:commandButton id="limpaTela"
+						 immediate="true"
+						 value="Limpar"
+						 action="#{participanteFormBean.limpaTelaCadastro}"
+						 update="formulario"
+						 styleClass="bt-padrao fr"
+						 ajax="false"
+						 />
+		</h:form>
+	</ui:define>
+</ui:composition>

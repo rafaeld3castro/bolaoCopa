@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+<f:view>
+	<h:form>
+
+		<h2 class="dn">Menu Principal</h2>
+
+		<p:menubar>
+			<p:menuitem value="Início" url="/home.faces" />
+			<p:menuitem value="Minhas Apostas" url="/paginas/apostas.faces" />
+			<p:submenu label="Palpites">
+				<p:menuitem value="por Participante"
+					url="/paginas/apostaParticipante.faces" />
+				<p:menuitem value="por Jogo" url="/paginas/apostaJogo.faces" />
+				<p:menuitem value="por Grupo" url="/paginas/apostaGrupo.faces" />
+			</p:submenu>
+			<p:menuitem value="Classificação"
+				url="/paginas/classificacaoGeral.faces" />
+			<p:menuitem value="Simulador" url="/paginas/simulador.faces" />
+			<p:menuitem value="Regras" url="/paginas/regras.faces" />
+			<p:menuitem value="Ajuda" url="/paginas/ajuda.faces" />
+		</p:menubar>
+			
+
+		<!-- 	<ul> -->
+		<!-- 		<ui:fragment> -->
+
+		<!-- MENU TABELAS -->
+		<!-- 		<li> -->
+		<!-- 			<a href="#" title="">Tabelas</a> -->
+		<!-- 			<ul class="sub-menu"> -->
+		<!-- 				<li> -->
+		<!-- 	            	 <a href="/bolaoCopaDoMundo/paginas/grupoList.faces" title="" >Grupo</a> -->
+		<!-- 	            	 <a href="/bolaoCopaDoMundo/paginas/selecaoList.faces" title="" >Seleção</a> -->
+		<!-- 	        	</li> -->
+		<!-- 			</ul> -->
+		<!-- 		</li> -->
+
+		<!-- MENU CADASTROS -->
+		<!-- 		<li> -->
+		<!-- 			<a href="#" title="">Cadastros</a> -->
+		<!-- 			<ul class="sub-menu"> -->
+		<!-- 				<li> -->
+		<!-- 					<a href="/bolaoCopaDoMundo/paginas/participanteList.faces" title="" >Participante</a> -->
+		<!-- 					<a href="/bolaoCopaDoMundo/paginas/jogosList.faces" title="" >Jogos</a> -->
+		<!-- 					<a href="/bolaoCopaDoMundo/paginas/classificacaoGrupoList.faces" title="" >Classificação Grupo</a> -->
+
+		<!-- 				</li> -->
+		<!-- 			</ul> -->
+		<!--         </li> -->
+
+		<!-- MENU CONSULTA -->
+		<!-- 		<li> -->
+		<!-- 			<a href="#" title="">Consultas</a> -->
+		<!-- 			<ul class="sub-menu"> -->
+		<!-- 				<li> -->
+		<!-- 					<a href="#" title=""></a> -->
+		<!-- 				</li> -->
+		<!-- 			</ul> -->
+		<!--         </li> -->
+
+		<!-- 		</ui:fragment> -->
+
+		<!-- 	</ul> -->
+
+	</h:form>
+</f:view>
+</html>

@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+<f:view>
+	<h:form>
+	<div class="dropdown">
+		<sec:ifAnyGranted roles="ROLE_CONSULTAS">
+			<a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fas fa-user"></i>
+				Olá, #{LoginBean.usuarioLogado.username}! Sua classificação é: #{LoginBean.usuarioLogado.classificacao}
+			</a>
+		</sec:ifAnyGranted>
+		<sec:ifNotGranted roles="ROLE_CONSULTAS">
+			<a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fas fa-user"></i>
+	    		Olá, #{LoginBean.usuarioLogado.username}!
+	  		</a>
+		</sec:ifNotGranted>  
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    		<sec:ifAnyGranted roles="ROLE_ADMIN">
+    			<h6 class="dropdown-header">Tabelas</h6>
+    			<a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/grupoList.faces">Grupo</a>
+    			<a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/selecaoList.faces">Seleção</a>
+				<div class="dropdown-divider"></div>
+				<h6 class="dropdown-header">Cadastros</h6>
+    			<a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/participanteList.faces">Participante</a>
+    			<a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/participantePendenciaList.faces">Pendências</a>
+    			<a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/jogosList.faces">Jogos</a>
+    			<a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/classificacaoGrupoList.faces">Classificação Grupo</a>
+				<div class="dropdown-divider"></div>
+			</sec:ifAnyGranted>
+			<a class="dropdown-item" href="/bolaoCopaDoMundo/logout.jsp">Sair</a>
+		</div>
+		
+
+		<!-- 	<ul> -->
+		<!-- 		<ui:fragment> -->
+
+		<!-- MENU TABELAS -->
+		<!-- 		<li> -->
+		<!-- 			<a href="#" title="">Tabelas</a> -->
+		<!-- 			<ul class="sub-menu"> -->
+		<!-- 				<li> -->
+		<!-- 	            	 <a href="/bolaoCopaDoMundo/paginas/grupoList.faces" title="" >Grupo</a> -->
+		<!-- 	            	 <a href="/bolaoCopaDoMundo/paginas/selecaoList.faces" title="" >Seleção</a> -->
+		<!-- 	        	</li> -->
+		<!-- 			</ul> -->
+		<!-- 		</li> -->
+
+		<!-- MENU CADASTROS -->
+		<!-- 		<li> -->
+		<!-- 			<a href="#" title="">Cadastros</a> -->
+		<!-- 			<ul class="sub-menu"> -->
+		<!-- 				<li> -->
+		<!-- 					<a href="/bolaoCopaDoMundo/paginas/participanteList.faces" title="" >Participante</a> -->
+		<!-- 					<a href="/bolaoCopaDoMundo/paginas/jogosList.faces" title="" >Jogos</a> -->
+		<!-- 					<a href="/bolaoCopaDoMundo/paginas/classificacaoGrupoList.faces" title="" >Classificação Grupo</a> -->
+
+		<!-- 				</li> -->
+		<!-- 			</ul> -->
+		<!--         </li> -->
+
+		<!-- MENU CONSULTA -->
+		<!-- 		<li> -->
+		<!-- 			<a href="#" title="">Consultas</a> -->
+		<!-- 			<ul class="sub-menu"> -->
+		<!-- 				<li> -->
+		<!-- 					<a href="#" title=""></a> -->
+		<!-- 				</li> -->
+		<!-- 			</ul> -->
+		<!--         </li> -->
+
+		<!-- 		</ui:fragment> -->
+
+		<!-- 	</ul> -->
+	</div>
+	</h:form>
+</f:view>
+</html>

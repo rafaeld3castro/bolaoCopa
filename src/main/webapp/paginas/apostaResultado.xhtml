@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<h1>Apostas por Jogos</h1>
+
+		<h:form id="form">
+			<p:focus context="lista" />
+			<p:messages autoUpdate="true" errorClass="errorMessage" />
+			
+			<div class="form-row">
+				<div class="input-group mb-3 col-12">
+					<div class="input-group-prepend">
+     					<label class="input-group-text" for="jogo">Jogo</label>
+  					</div>
+					<p:selectOneMenu value="#{apostasResultadoBean.jogoSelecionado}"
+							converter="entityConverter" panelStyle="width:150px"
+							effect="fade" var="j"  filter="true"
+							filterMatchMode="startsWith" 
+							required="true"
+							requiredMessage="Nenhum jogo foi selecionado" 
+							styleClass="custom-select">
+							<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItems value="#{apostasResultadoBean.jogos}" var="jogo"
+								itemLabel="#{jogo.selecao1.nome}  vs  #{jogo.selecao2.nome}"
+								itemValue="#{jogo}" />
+
+							<p:column>
+									#{j.selecao1.nome}
+							</p:column>
+
+							<p:column>
+								<p:graphicImage value="../img/#{j.selecao1.id}.png" />
+							</p:column>
+
+							<p:column>  
+			              			 X
+			            		</p:column>
+							<p:column>
+								<p:graphicImage value="../img/#{j.selecao2.id}.png" />
+							</p:column>
+							<p:column>
+									 #{j.selecao2.nome} 
+								</p:column>
+
+						</p:selectOneMenu>
+						<div class="input-group-prepend">
+     						<label class="input-group-text" for="jogo">Resultado</label>
+  						</div>
+  						<p:inputMask id="gol1" value="#{apostasResultadoBean.jogoSelecionado.gol1}"
+							mask="?99"
+							placeHolder=""							
+							styleClass="form-control">						
+						</p:inputMask>
+						<h:outputText value=" X "/>
+						<p:inputMask id="gol2" value="#{apostasResultadoBean.jogoSelecionado.gol2}"
+							mask="?99"
+							placeHolder=""							
+							styleClass="form-control">						
+						</p:inputMask>
+						
+					<div class="input-group-append">
+						<p:commandButton id="pesquisar" value="Pesquisar"
+						action="#{apostasResultadoBean.searchByBJogo}" update="lista"
+						styleClass="btn btn-secondary btn-sm" />
+	
+						<p:commandButton id="limpaTela" value="Limpar"
+						action="#{apostasResultadoBean.limpaTela}"
+						styleClass="btn btn-sm" update="form" />
+								
+			  				</div>
+			  		</div>
+		  		</div>
+
+				
+
+					<p:dataTable id="lista" lazy="true" 
+						value="#{apostasResultadoBean.model}" rowIndexVar="rowIndex" var="item"
+						paginatorPosition="bottom" paginator="true" rows="20"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="20,30,50" emptyMessage="Não há registros"
+						styleClass="table table-sm table-striped table-hover">
+						
+						<p:column id="col1" headerText="Participante" styleClass="center">
+							<h:outputText value="#{item.participante.nome}" />
+						</p:column>
+
+						<p:column id="col4" styleClass="cel-10 center"
+							headerText="Seleção">
+							<h:outputText value="#{item.jogos.selecao1.nome}"
+								styleClass="cel-10" />
+						</p:column>
+
+						<p:column id="colB1" styleClass="cel-3 center">
+							<h:graphicImage value="../img/#{item.jogos.selecao1.id}.png" />
+						</p:column>
+
+						<p:column headerText="" styleClass="tabela-dados cel-3 center">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{item.gol1}" style="text-align:center" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="modelInput" value="#{item.gol1}"
+										style="width:10%; margin-left:5px" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column id="col5" styleClass="cel-3 center" headerText="Vs">
+							<h:outputText value=" X " />
+						</p:column>
+
+						<p:column headerText="" styleClass="tabela-dados cel-3 center">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{item.gol2}" style="text-align:center" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{item.gol2}"
+										style="width:50%; margin-left:5px" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column id="colB2" styleClass="cel-3 center">
+							<h:graphicImage value="../img/#{item.jogos.selecao2.id}.png" />
+						</p:column>
+						<p:column id="col6" styleClass="cel-10 center"
+							headerText="Seleção">
+							<h:outputText value="#{item.jogos.selecao2.nome}"
+								styleClass="cel-10" />
+						</p:column>
+
+						<p:column id="col7" styleClass="cel-10 center" headerText="Pontos">
+							<h:outputText value="#{item.pontos}" styleClass="cel-10" />
+						</p:column>
+
+					</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

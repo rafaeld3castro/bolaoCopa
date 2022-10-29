@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+<f:view>
+	<h:form>
+		<nav class="navbar navbar-expand-lg navbar-light nav-bg">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/bolaoCopaDoMundo/paginas/inicio.faces">INÍCIO <span class="sr-only">(current)</span></a>
+					</li>
+					<!-- <sec:ifAnyGranted roles="ROLE_PARTICIPANTE">
+						<li class="nav-item">
+					  		<a class="nav-link" href="/bolaoCopaDoMundo/paginas/apostas.faces">MINHAS APOSTAS</a>
+						</li>
+					</sec:ifAnyGranted> -->
+					<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_CONSULTAS">
+			      		<li class="nav-item dropdown">
+					        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					          Palpites
+					        </a>
+					        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					          <a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/apostaParticipante.faces">por Participante</a>
+					          <a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/apostaJogo.faces">por Jogo</a>
+					          <a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/apostaGrupo.faces">por Grupo</a>
+					           <a class="dropdown-item" href="/bolaoCopaDoMundo/paginas/apostaResultado.faces">por Resultado</a>
+					        </div>
+			      		</li>			      	
+				      	<li class="nav-item">
+				        	<a class="nav-link" href="/bolaoCopaDoMundo/paginas/classificacaoGeral.faces">Classificação</a>
+				      	</li>
+				      	<li class="nav-item">
+				        	<a class="nav-link" href="/bolaoCopaDoMundo/paginas/simulador.faces">Simulador</a>
+				      	</li>
+			      	</sec:ifAnyGranted>
+			      	<li class="nav-item">
+			        	<a class="nav-link" href="/bolaoCopaDoMundo/paginas/regras.faces">Regras</a>
+			      	</li>
+			      	<li class="nav-item">
+			        	<a class="nav-link" href="/bolaoCopaDoMundo/paginas/ajuda.faces">Ajuda</a>
+			      	</li>
+				</ul>
+			</div>
+			  
+			  <ui:include src="menuUser.xhtml" />
+		</nav>		
+
+	</h:form>
+</f:view>
+</html>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<h1>Participantes</h1>
+
+		<h:form id="form">
+			<p:commandButton id="incluir" value="Novo Participante"
+				action="#{participanteFormBean.prepareIncluir}"
+				styleClass="btn btn-secondary btn-sm" />
+						
+			<hr />
+
+			<p:messages autoUpdate="true" errorClass="errorMessage" />
+
+			<div class="form-row">
+				<div class="input-group mb-3 col-6">
+					<div class="input-group-prepend">
+     					<label class="input-group-text" for="situacao">Situação</label>
+  					</div>
+  					<p:selectOneMenu id="situacao" value="#{participanteListBean.ativo}" styleClass="custom-select">
+								<f:selectItem itemLabel="Todos" itemValue="-1" />
+								<f:selectItem itemLabel="Ativo" itemValue="1" />
+								<f:selectItem itemLabel="Inativo" itemValue="0" />
+							</p:selectOneMenu>
+				</div>
+			
+			
+				<div class="input-group mb-3 col-6">
+					<div class="input-group-prepend">
+						<label class="input-group-text" for="participante">Participante</label>
+					</div>
+						<p:inputText id="nome" value="#{participanteListBean.nome}" styleClass="form-control"/>					
+						<div class="input-group-append">
+								<p:commandButton	id="consultar"
+												value="Consultar"
+												action="#{participanteListBean.consultar}"
+												update="lista"
+												styleClass="btn btn-secondary btn-sm"
+												/>
+								<p:commandButton id="limpaTela" value="Limpar"
+									action="#{participanteListBean.limpaTela}" update="form"
+									styleClass="btn btn-sm" />
+		  				</div>
+				</div>
+
+			</div>
+	
+
+				<p:dataTable id="lista" lazy="true"
+					value="#{participanteListBean.model}" var="item"
+					paginatorPosition="bottom" paginator="true" rows="10"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,15,20" styleClass="table table-sm table-striped table-hover"
+					emptyMessage="Não há registros">
+
+					<p:column headerText="STS">
+						<p:outputPanel rendered="#{item.ativo == true}">
+							<span class="badge badge-pill badge-success"><i class="fas fa-check-circle"></i></span>
+						</p:outputPanel>
+						<p:outputPanel rendered="#{item.ativo == false}">
+							<span class="badge badge-pill badge-danger"><i class="fas fa-ban"></i></span>
+						</p:outputPanel>
+					</p:column>
+
+					<p:column headerText="NOME">
+						#{item.nome}<br />
+						<span class="badge badge-pill badge-light">#{item.username}</span>
+					</p:column>
+
+					<p:column headerText="E-MAIL">
+						<h:outputText value="#{item.email}" />
+					</p:column>
+
+					<p:column headerText="CONTATO">
+						<h:outputText value="#{item.contato}" />
+					</p:column>
+
+					<p:column headerText="TELEFONE">
+						<h:outputText value="#{item.telefone}" />
+					</p:column>
+					
+					<p:column styleClass="text-center"  headerText="PENDENCIA JOGO">
+						<h:outputText value="#{item.apostJogoPendente}" />
+					</p:column>
+					<p:column styleClass="text-center"  headerText="PENDENCIA GRUPO">
+						<h:outputText value="#{item.apostaGrupoPendente}" />
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandButton id="resetSenha"
+							styleClass="btn btn-light btn-sm"
+							action="#{participanteListBean.resetarSenha}"
+							value="Alterar Senha"
+							onclick="var x= confirm('Deseja realmente resetar a senha?');if(!x){return false;}">
+							<f:setPropertyActionListener
+								target="#{participanteListBean.participante}" value="#{item}" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column headerText="">
+						<h:commandLink id="editar" value=""
+							action="#{participanteFormBean.prepareAlterar}"
+							styleClass="btn btn-secondary btn-sm">
+							Editar
+							<f:setPropertyActionListener
+								target="#{participanteFormBean.participante}" value="#{item}" />
+						</h:commandLink>
+					</p:column>
+
+					
+
+					<!-- 
+					<p:column style="width:4%">
+						<p:commandButton id="detalhe" update=":form2:dados"
+							onsuccess="dlg.show()" icon="ui-icon-search">
+							<f:setPropertyActionListener value="#{item}"
+								target="#{participanteListBean.participante}" />
+						</p:commandButton>
+					</p:column>
+					 -->
+				</p:dataTable>
+
+
+		</h:form>
+
+		<h:form id="form2">
+			<div>
+				<p:dialog id="popup" header="Participante" widgetVar="dlg"
+					resizable="false" modal="true">
+
+					<h:panelGrid id="dados" columns="2">
+						<h:outputText value="ID:" />
+						<h:outputText value="#{participanteListBean.participante.id}"
+							style="font-weight:bold" />
+
+						<h:outputText value="NOME:" />
+						<h:outputText value="#{participanteListBean.participante.nome}"
+							style="font-weight:bold" />
+
+						<h:outputText value="LOGIN:" />
+						<h:outputText
+							value="#{participanteListBean.participante.username}"
+							style="font-weight:bold" />
+
+						<h:outputText value="ATIVO:" />
+						<h:outputText value="Ativo"
+							rendered="#{participanteListBean.participante.ativo == true}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Inativo"
+							rendered="#{participanteListBean.participante.ativo == false}"
+							style="font-weight:bold" />
+
+						<h:outputText value="E-MAIL:" />
+						<h:outputText value="E-mail nÃ£o informado"
+							rendered="#{participanteListBean.participante.email == null}"
+							style="font-weight:bold" />
+
+						<h:outputText value="#{participanteListBean.participante.email}"
+							rendered="#{participanteListBean.participante.email != null}"
+							style="font-weight:bold" />
+
+					</h:panelGrid>
+				</p:dialog>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

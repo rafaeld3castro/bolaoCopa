@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	>
+
+	<ui:define name="content">
+		<h1>Ajuda</h1>
+
+		
+		<h:form id="formulario">
+
+			<p:dialog></p:dialog>
+			<p:fieldset legend="Dúvidas no Cadastro?" toggleable="true" toggleSpeed="500" collapsed="true">
+				<p>-Você deve fornecer todos os dados sinalizados com asterisco(*).</p>
+				<p>Observe que no campo <b>Contato</b> você deve indicar o nome da pessoa que é seu contato no Tribunal de Contas.</p>
+				<p>Se você é funcionário do Tribunal de Contas basta colocar "TCE".</p>
+				<p>- Após preencher os dados clique em <b>Salvar</b>.</p>
+				<p>- Após o salvamento você receberá um e-mail com mais informações para prosseguir seu cadastro.</p>
+			</p:fieldset>
+			<p:fieldset legend="Como faço minha aposta?" toggleable="true" toggleSpeed="500" collapsed="true"> 
+					<p>- Acesse o menu <b>Minhas Apostas</b></p>
+					<h:graphicImage value="../img/minhas_apostas.png"
+						style="margin-left: 25px; margin-bottom: 15px; margin-top: 10px;" />
+					<p>- A tela Minhas Apostas contem uma tabela com todos os jogos e cada linha contém os campos para preencher o placar da aposta referente aquele jogo. </p>
+					<h:graphicImage value="../img/aposta_gol.png"
+						style="margin-left: 25px; margin-top: 10px;" />
+					<div style="margin-left: 40px;margin-bottom: 15px;">
+						<p>Aqui o jogo Bélgica x Argélia foi preenchido, mas o jogo Brasil x México ainda não.</p>
+					</div>
+					<div>
+						<p>- Observe que para sua aposta estar finalizada, todos os jogos da tabela deverão está preenchidos. E para verificar isso veja se o informativo, que fica no canto superior direito da tela, indica:<b>"Existem 0 apostas incompletas!"</b> </p>
+						<h:graphicImage value="../img/incompletas.png"
+							style="margin-left: 25px; margin-bottom: 15px; margin-top: 10px;" />
+					</div>
+			</p:fieldset>
+			<p:fieldset legend="Como consultar a aposta dos outros participantes?" toggleable="true" toggleSpeed="500" collapsed="true"> 	
+					<p>- Existem 3 formas de consulta: por Participante, por Jogo e por Grupo.</p>
+					<div class="p-regras">
+						<p:accordionPanel style="width:60%; margin-top:10px; margin-left: 20px;"> 
+							<p:tab title="por Participante">
+								<p>- Você pode ver a aposta, jogos e grupos, do participante selecionado</p> 
+								<h:graphicImage value="../img/por_participante.png"
+									style="margin-left: 25px; margin-bottom: 15px; margin-top: 10px;" />
+							</p:tab>
+							<p:tab title="por Jogo">
+								<p>- Você pode ver a aposta de todos os participantes para o jogo selecionado</p> 
+								<h:graphicImage value="../img/por_jogo.png"
+									style="margin-left: 25px; margin-bottom: 15px; margin-top: 10px;" /> 
+							</p:tab>
+							<p:tab title="por Grupo">
+								<p>- Você pode ver a aposta de todos os participante para o grupo selecionado</p> 
+								<h:graphicImage value="../img/por_grupo.png"
+									style="margin-left: 25px; margin-bottom: 15px; margin-top: 10px;" /> 
+							</p:tab> 
+						</p:accordionPanel>
+					</div>
+			</p:fieldset>
+			<p:fieldset legend="Como simular minha classificação usando o Simulador?" toggleable="true" toggleSpeed="500" collapsed="true">
+				<p>- Acesse o menu <b>Simulador</b></p>
+				<h:graphicImage value="../img/simulador.png"
+					style="margin-left: 25px; margin-bottom: 15px; margin-top: 10px;" />
+				<p>- Na tela Simulador você poderá simular o resultado dos jogos que ainda não foram disputados.</p>
+				<p>Para simular um resultado basta preencher os campos referente ao placar jogo que se quer simular na tabela <b>Simulador</b></p>
+				<h:graphicImage value="../img/simular_placar.png"
+					style="margin-left: 25px; margin-top: 10px;" />
+				<div style="margin-left: 40px;margin-bottom: 15px;">
+					<p>Se o jogo  não possui  uma caixa de texto</p>
+					<p>é porque esse jogo já ocorreu. Nesse caso</p>
+					<p>o jogo Argentina x Bósnia já  ocorreu não</p>
+					<p>podendo mais simular seu resultado</p>
+				</div>
+				<p>Se você não souber o nome da seleção basta pôr a seta do <i>mouse</i> sobre a bandeira.</p>
+				<h:graphicImage value="../img/nome_selecao.png"
+					style="margin-left: 25px; margin-bottom: 15px; margin-top: 10px;" />
+			</p:fieldset>
+			<p:fieldset legend="Ainda não solucionou suas dúvidas?" toggleable="true" toggleSpeed="500" collapsed="true">
+				<p>- Mande um e-mail com sua dúvida para <b>bolaocopadomundofc@gmail.com</b> com o assunto "Dúvida"</p>
+				<p>ou ligue para 987533736</p>
+			</p:fieldset>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

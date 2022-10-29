@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+		<div class="titulo-pagina">
+
+			<h2>Estatísticas Jogos</h2>
+
+		</div>
+		<h:form id="form" styleClass="formularios box-border">
+
+			<p:messages errorClass="errorMessage" showDetail="false"
+				autoUpdate="true" rendered="true" />
+
+			<div style="float:left;">
+				<div class="select-box" style="width: initial; float: initial;">
+					<label for="">Jogo</label>
+					<p:selectOneMenu value="#{estatisticasJogoBean.jogoSelecionado}"
+						converter="entityConverter" panelStyle="width:150px" effect="fade"
+						var="j" style="width:350px;" filter="true"
+						filterMatchMode="startsWith" required="true"
+						requiredMessage="Nenhum jogo foi selecionado">
+						<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItems value="#{estatisticasJogoBean.jogosOk}" var="jogo"
+							itemLabel="#{jogo.selecao1.nome} #{jogo.gol1}  x #{jogo.gol2}  #{jogo.selecao2.nome}"
+							itemValue="#{jogo}" />
+
+						<p:column>
+									#{j.selecao1.nome}
+								</p:column>
+
+						<p:column>
+							<p:graphicImage value="../img/#{j.selecao1.id}.png" />
+						</p:column>
+
+						<p:column>  
+			              			 X
+			            		</p:column>
+						<p:column>
+							<p:graphicImage value="../img/#{j.selecao2.id}.png" />
+						</p:column>
+						<p:column>
+							#{j.selecao2.nome} 
+						</p:column>
+
+						<p:ajax update="grafico1, accordionListas"
+							listener="#{estatisticasJogoBean.createPieModel}" />
+					</p:selectOneMenu>
+				</div>
+
+				<div>
+					<p:pieChart id="grafico1" value="#{estatisticasJogoBean.pieModel}"
+						legendPosition="e" fill="true" showDataLabels="true"
+						style="width:450px;height:350px"
+						sliceMargin="5" diameter="180" seriesColors="5FB404, F7FE2E, 0080FF, 01DFD7, FF0000"/>
+					<!-- 						rendered="#{estatisticasBean.flagPieModel == true}" -->
+				
+<!-- 					<p:barChart id="grafico2" value="#{estatisticasJogoBean.categoryModel}" -->
+<!-- 						legendPosition="ne" title="Basic Bar Chart" min="0" max="75" animate="true" stacked="true" -->
+<!-- 						style="width:450px;height:400px" /> -->
+				</div>
+
+			</div>
+
+			<div style="float: left; margin-left: 100px; margin-top: 70px;">
+				<p:accordionPanel id="accordionListas">
+					<p:tab
+						title="Escores Cheios - (#{estatisticasJogoBean.escoresCheios.size()} Paticipantes)">
+						<p:dataTable id="escoresCheioslist"
+							value="#{estatisticasJogoBean.escoresCheios}"
+							rowIndexVar="rowIndex" var="item" paginatorPosition="bottom"
+							paginator="true" rows="10"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							styleClass="tabela-dados"
+							emptyMessage="Não há registros">
+
+							<p:column headerText="NOME" sortBy="item.nome">
+								<h:outputText value="#{item.nome}" />
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+					
+					<p:tab
+						title="Empate sem acertar o placar - (#{estatisticasJogoBean.empateSemPlacar.size()} Paticipantes)">
+						<p:dataTable id="empateSemPlacarlist"
+							value="#{estatisticasJogoBean.empateSemPlacar}"
+							rowIndexVar="rowIndex" var="item" paginatorPosition="bottom"
+							paginator="true" rows="10"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							styleClass="tabela-dados"
+							emptyMessage="Não há registros">
+
+							<p:column headerText="NOME" sortBy="item.nome">
+								<h:outputText value="#{item.nome}" />
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+					
+					<p:tab
+						title="Escore da Selecao 1 - (#{estatisticasJogoBean.escoreSelecao1.size()} Paticipantes)">
+						<p:dataTable id="escoreSelecao1list" 
+							value="#{estatisticasJogoBean.escoreSelecao1}"
+							rowIndexVar="rowIndex" var="item" paginatorPosition="bottom"
+							paginator="true" rows="10"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							styleClass="tabela-dados"
+							emptyMessage="Não há registros">
+
+							<p:column headerText="NOME" sortBy="item.nome">
+								<h:outputText value="#{item.nome}" />
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+					
+					<p:tab
+						title="Escore da Selecao 2 - (#{estatisticasJogoBean.escoreSelecao2.size()} Paticipantes)">
+						<p:dataTable id="escoreSelecao2list" 
+							value="#{estatisticasJogoBean.escoreSelecao2}"
+							rowIndexVar="rowIndex" var="item" paginatorPosition="bottom"
+							paginator="true" rows="10"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							styleClass="tabela-dados"
+							emptyMessage="Não há registros">
+
+							<p:column headerText="NOME" sortBy="item.nome">
+								<h:outputText value="#{item.nome}" />
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+					
+					<p:tab
+						title="Não Pontuou - (#{estatisticasJogoBean.naoPontuou.size()} Paticipantes)">
+						<p:dataTable id="naoPontuoulist" 
+							value="#{estatisticasJogoBean.naoPontuou}"
+							rowIndexVar="rowIndex" var="item" paginatorPosition="bottom"
+							paginator="true" rows="10"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							styleClass="tabela-dados"
+							emptyMessage="Não há registros">
+
+							<p:column headerText="NOME" sortBy="item.nome">
+								<h:outputText value="#{item.nome}" />
+							</p:column>
+						</p:dataTable>
+					</p:tab>
+				</p:accordionPanel>
+			</div>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+	<ui:define name="content">
+		<h1>Classificação Geral</h1>
+
+		<h:form id="form" styleClass="">
+		
+			<sec:ifAnyGranted roles="ROLE_ADMIN">
+				<div class="btn-group" role="group" aria-label="Basic example">
+								
+						 <p:commandButton id="relatorio"
+											 value="Relatorio"
+											 actionListener="#{classificacaoGeralBean.relatorio}" 
+											  styleClass="btn btn-secondary btn-sm"
+											 ajax="false"
+											 />
+						 <p:commandButton id="enviarEmail"
+											 value="email"
+											 actionListener="#{classificacaoGeralBean.enviarEmailParticipantes}" 
+											  styleClass="btn btn-secondary btn-sm"
+											 ajax="false"
+											 />
+					
+				</div>
+				<hr />
+			</sec:ifAnyGranted>
+
+			<p:messages infoClass="infoMessage" errorClass="errorMessage"
+				showDetail="true" autoUpdate="false"
+				rendered="#{classificacaoGeralBean.classificacaoList != null}" />
+
+			<div>
+rowStyleClass="#{rowIndex == 0 ? 'linha-gold' : null} #{rowIndex == 1 ? 'linha-silver' : null} #{rowIndex == 2 ? 'linha-bronze' : null} #{rowIndex == 3 ? 'linha-copper' : null}"
+				<p:dataTable id="lista" lazy="true"
+					value="#{classificacaoGeralBean.model}" rowIndexVar="rowIndex"
+					var="item" paginatorPosition="bottom" paginator="true" rows="20"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="20,30,50"   rowStyleClass="#{rowIndex le 3 ? 'linha' : null } #{item == classificacaoGeralBean.usuarioLogado ? 'linha-silver' : null}" 
+					emptyMessage="Não há registros" styleClass="table table-sm table-striped table-hover">
+
+					<p:column styleClass="text-center" headerText="Classificação">
+						<h:outputText value="#{rowIndex+1}" />
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{item.participante.nome}" />
+					</p:column>
+
+					<p:column styleClass="text-center" headerText="Total">
+						<h:outputText value="#{item.totalPontos}" />
+					</p:column>
+
+					<p:column styleClass="text-center" headerText="Pontos Jogos">
+						<h:outputText value="#{item.pontosJogo}" />
+					</p:column>
+
+					<p:column styleClass="text-center" headerText="Pontos Grupo">
+						<h:outputText value="0"
+							rendered="#{item.pontosClassificacao == null}" />
+						<h:outputText value="#{item.pontosClassificacao}"
+							rendered="#{item.pontosClassificacao != null}" />
+					</p:column>
+
+					<p:column styleClass="text-center" headerText="Escores Cheios">
+						<h:outputText value="#{item.escoreCheio}" />
+					</p:column>
+
+					<p:column styleClass="text-center" headerText="Jogos do Brasil">
+						<h:outputText value="#{item.pontosBrasil}" />
+					</p:column>
+					<p:column styleClass="text-center" headerText="Acertos 1º Lugar Grupo">
+						<h:outputText value="#{item.acertoPrimeiroLugar}" />
+					</p:column>
+
+				</p:dataTable>
+
+			</div>
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>

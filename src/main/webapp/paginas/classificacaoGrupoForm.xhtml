@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<h1>Novo/Alterar Classificação Grupo</h1>
+
+		<f:metadata>
+			<f:viewParam name="idClassificacaoGrupo" id="idClassificacaoGrupo"
+				value="#{classificacaoGrupoFormBean.classificacaoGrupoId}" />
+			<f:event type="preRenderView"
+				listener="#{classificacaoGrupoFormBean.init}" />
+		</f:metadata>
+
+		<h:form id="formulario">
+
+			<p:growl id="msg" showDetail="false" escape="false" />
+
+				<p:messages infoClass="infoMessage" errorClass="errorMessage"
+					rendered="true" />
+				<h:panelGroup
+					rendered="#{classificacaoGrupoFormBean.alterar == true}">
+
+					<!-- <div class="input-box box-10 mg-bottom-10">
+				<h:outputText value="ID" />
+				<div class="conteiner">
+					<h:inputText disabled="true" value="#{classificacaoGrupoFormBean.ClassificacaoGrupo.id}" />
+				</div>
+			</div> -->
+				</h:panelGroup>
+
+				<div class="form-row">
+					<div class="col-6">
+						<label>Grupos*</label><br/>
+
+						<p:selectOneMenu id="grupo_select"
+							value="#{classificacaoGrupoFormBean.grupoSelecionado}"
+							converter="entityConverter" required="true"
+							styleClass="custom-select form-control" >
+							<f:selectItem id="selecioneGrupo" itemLabel="Selecione..."
+								 />
+							<f:selectItems value="#{classificacaoGrupoListBean.opcaoGrupo}"
+								var="grupo" itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
+							<p:ajax listener="#{classificacaoGrupoFormBean.consultarGrupo}"
+								update="pojoPickList,salvar " event="change" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+
+				<br />
+
+				<p:pickList id="pojoPickList"
+					value="#{classificacaoGrupoFormBean.selecoes}" var="selecao"
+					itemValue="#{selecao}" itemLabel="#{selecao.nome}"
+					converter="primeFacesPickListConverter" showSourceControls="false"
+					showTargetControls="false" showCheckbox="true"
+					showSourceFilter="false" showTargetFilter="false"
+					filterMatchMode="contains">
+
+					<f:facet name="sourceCaption">Seleções</f:facet>
+					<f:facet name="targetCaption">Classificação</f:facet>
+
+					<p:ajax event="transfer"
+						listener="#{classificacaoGrupoFormBean.onTransfer}"
+						update="msg,salvar" />
+
+					<p:column style="width:25%">
+						<p:graphicImage value="../img/#{selecao.id}.png" width="40"
+							height="40" />
+					</p:column>
+
+					<p:column style="width:75%;">#{selecao.nome}</p:column>
+
+				</p:pickList>
+
+			<hr />
+
+			<p:commandButton id="salvar"
+				action="#{classificacaoGrupoFormBean.salvar}" value="Salvar"
+				styleClass="btn btn-primary btn-sm" update="formulario"
+				disabled="#{!classificacaoGrupoFormBean.permiteSalvar}" />
+
+			<p:commandButton id="voltar" immediate="true" value="Voltar"
+				styleClass="btn btn-light btn-sm"
+				action="#{classificacaoGrupoFormBean.voltar}" />
+				
+			<p:commandButton id="limpaTela" value="Limpar"
+				action="#{classificacaoGrupoFormBean.limpaTela}" update="formulario"
+				title="Limpar Formulário"
+				styleClass="btn btn-light btn-sm" immediate="true" />
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

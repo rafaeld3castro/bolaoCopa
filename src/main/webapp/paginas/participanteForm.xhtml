@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="content">
+
+		<div class="titulo-pagina">
+			<h2>Descrição</h2>
+		</div>
+
+		<h:form id="formulario" styleClass="formularios">
+			<fieldset>
+				<p:messages autoUpdate="true" errorClass="errorMessage" />
+				<h:panelGroup rendered="#{participanteFormBean.alterar == true}">
+					<div class="input-box">
+						<label>ID</label>
+						<div class="conteiner">
+							<p:inputText disabled="true"
+								value="#{participanteFormBean.participante.id}" />
+						</div>
+					</div>
+				</h:panelGroup>
+
+				<div>
+					<div class="input-box box-50" style="float: none !important">
+						<label>Nome *</label>
+						<div class="conteiner">
+							<p:inputText id="nome"
+								value="#{participanteFormBean.participante.nome}"
+								required="true" requiredMessage="O nome Ã© obrigatÃ³rio"
+								maxlength="150">
+							</p:inputText>
+						</div>
+					</div>
+
+					<div class="input-box box-18" style="float: none">
+						<label>Login *</label>
+						<div class="conteiner">
+							<p:inputText id="login"
+								value="#{participanteFormBean.participante.username}"
+								required="true" requiredMessage="O login Ã© obrigatÃ³rio."
+								maxlength="30">
+							</p:inputText>
+						</div>
+					</div>
+
+					<div class="input-box box-18" style="float: none">
+						<label>Senha *</label>
+						<div class="conteiner">
+							<p:password id="senha1"
+								value="#{participanteFormBean.participante.password}"
+								required="true" requiredMessage="A senha é obrigatória."
+								rendered="#{participanteFormBean.alterar == false}"
+								maxlength="32" feedback="true"
+								promptLabel="Por favor, digite uma senha" weakLabel="Fraco"
+								goodLabel="Médio" strongLabel="Forte" match="confirmarSenha1"
+								validatorMessage="Erro ao confirmar a senha" />
+
+							<p:password id="senha2" value="#{participanteFormBean.password}"
+								rendered="#{participanteFormBean.alterar == true}"
+								maxlength="32" feedback="true"
+								promptLabel="Por favor, digite uma senha" weakLabel="Fraco"
+								goodLabel="Médio" strongLabel="Forte" match="confirmarSenha2"
+								validatorMessage="Erro ao confirmar a senha" />
+						</div>
+					</div>
+
+					<div class="input-box box-18" style="float: none">
+						<label>Redigite a Senha *</label>
+						<div class="conteiner">
+							<p:password id="confirmarSenha1"
+								value="#{participanteFormBean.confirmarSenha}" required="true"
+								requiredMessage="Redigitar a senha é obrigatório."
+								maxlength="32"
+								rendered="#{participanteFormBean.alterar == false}" />
+							<p:password id="confirmarSenha2"
+								value="#{participanteFormBean.confirmarSenha}" maxlength="32"
+								rendered="#{participanteFormBean.alterar == true}" />
+						</div>
+					</div>
+
+					<div class="input-box box-30" style="float: none !important">
+						<label>E-mail </label>
+						<div class="conteiner">
+							<p:inputText id="email"
+								value="#{participanteFormBean.participante.email}"
+								maxlength="50">
+								<!-- required="true"
+									 requiredMessage="O email Ã© obrigatÃ³rio." -->
+								<!-- <f:validateLength maximum="50"/> -->
+							</p:inputText>
+						</div>
+					</div>
+
+					<div class="input-box box-18" style="float: none">
+						<label>Contato *</label>
+						<div class="conteiner">
+							<p:inputText id="contato"
+								value="#{participanteFormBean.participante.contato}"
+								required="true" requiredMessage="O contato é obrigatório."
+								maxlength="30">
+								<!-- <f:validateLength maximum="30"/> -->
+							</p:inputText>
+						</div>
+					</div>
+
+					<div class="input-box box-18" style="float: none">
+						<label>Telefone *</label>
+						<div class="conteiner">
+							<p:inputText id="telefone"
+								value="#{participanteFormBean.participante.telefone}"
+								required="true" requiredMessage="O contato é obrigatório."
+								maxlength="30">
+								<!-- <f:validateLength maximum="30"/> -->
+							</p:inputText>
+						</div>
+					</div>
+
+					<div class="checkbox-group">
+						<label>Ativo *</label>
+						<div>
+							<p:selectBooleanCheckbox
+								value="#{participanteFormBean.participante.ativo}" />
+						</div>
+					</div>
+
+				</div>
+
+			</fieldset>
+
+			<p:commandButton action="#{participanteFormBean.salvar}"
+				value="Salvar" update="formulario"
+				styleClass="fr  mg-left-15 mg-bottom-15" ajax="false" />
+
+			<c:if test="#{participanteListBean.consultar == true}">
+				<p:commandButton id="voltar1" immediate="true" value="Voltar"
+					action="#{participanteListBean.consultar}"
+					styleClass="fr mg-left-15 mg-bottom-15" />
+			</c:if>
+			<c:if test="#{participanteListBean.consultar == false}">
+				<p:commandButton id="voltar2" immediate="true" value="Voltar"
+					action="#{participanteListBean.limpaTela}"
+					styleClass="fr mg-left-15 mg-bottom-15" />
+			</c:if>
+
+			<p:commandButton id="limpaTela" immediate="true" value="Limpar"
+				action="#{participanteFormBean.limpaTela}" update="formulario"
+				styleClass="fr mg-left-15 mg-bottom-15" ajax="false" />
+		</h:form>
+	</ui:define>
+</ui:composition>

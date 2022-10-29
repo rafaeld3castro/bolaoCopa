@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="areasetor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ca4149a8-2125-48c9-8a4c-aa64d323bc63">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="27"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FILTRO" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BACK" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Program Files\\Java\\eclipse\\workspace\\srh\\WebContent\\img\\bg-topo.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Program Files\\Java\\eclipse\\workspace\\srh\\WebContent\\img\\logo-srh.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO_TCE" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Program Files\\Java\\eclipse\\workspace\\srh\\WebContent\\img\\logo-tce-report.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     participante.NOME as NMPARTICIPANTE,participante.IDPARTICIPANTE
+     IDJOGO,
+     grupo.NOME AS NMGRUPO,
+     DATE_FORMAT(jogos.DTJOGO,'%d/%m/%Y')as DTJOGO,
+     s1.NOME AS SELECAO1,
+     apostajogo.GOL1,
+     s2.NOME AS SELECAO2,
+     apostajogo.GOL2
+FROM
+     apostajogo INNER JOIN  participante ON apostajogo.IDPARTICIPANTE = participante.IDPARTICIPANTE
+     INNER JOIN jogos ON apostajogo.IDJOGO = jogos.IDJOGOS
+     INNER JOIN  grupo ON jogos.IDGRUPO = grupo.IDGRUPO
+     INNER JOIN selecao s1 ON jogos.SELECAO1 = s1.IDSELECAO
+     INNER JOIN selecao s2 ON jogos.SELECAO2 = s2.IDSELECAO
+$P!{FILTRO}
+ORDER BY
+     participante.NOME ASC,
+     IDJOGO ASC]]>
+	</queryString>
+	<field name="NMPARTICIPANTE" class="java.lang.String"/>
+	<field name="IDJOGO" class="java.lang.Integer"/>
+	<field name="NMGRUPO" class="java.lang.String"/>
+	<field name="DTJOGO" class="java.lang.String"/>
+	<field name="SELECAO1" class="java.lang.String"/>
+	<field name="GOL1" class="java.lang.Integer"/>
+	<field name="SELECAO2" class="java.lang.String"/>
+	<field name="GOL2" class="java.lang.Integer"/>
+	<field name="IDPARTICIPANTE" class="java.lang.String"/>
+	<group name="participante" isStartNewPage="true" isResetPageNumber="true">
+		<groupExpression><![CDATA[$F{NMPARTICIPANTE}]]></groupExpression>
+		<groupFooter>
+			<band height="52">
+				<subreport>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="2" y="31" width="552" height="18" uuid="193d15e1-2784-4e5a-a88f-c493dc1485c1"/>
+					<subreportParameter name="FILTRO"/>
+					<subreportParameter name="BACK"/>
+					<subreportParameter name="LOGO"/>
+					<subreportParameter name="LOGO_TCE"/>
+					<subreportParameter name="idParticipante">
+						<subreportParameterExpression><![CDATA[$F{IDPARTICIPANTE}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "/subapostasParticipante.jasper"]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement x="3" y="8" width="408" height="17" forecolor="#CC0000" uuid="ffda3558-fb32-494e-9cd5-d9a3149dcd90"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Apostas Classificação por Grupo]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="102">
+			<rectangle>
+				<reportElement x="1" y="82" width="554" height="16" forecolor="#CCCCCC" uuid="16d13530-5b1c-48e9-b038-0f8fd6fe26ae"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="0" width="554" height="62" forecolor="#CCCCCC" uuid="a329c13c-a028-4139-9ffb-aff89189cc48"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="198" y="5" width="356" height="37" forecolor="#CC0000" uuid="707a7371-58e3-412d-8541-f461ae1383fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tabela da Copa]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="2" width="172" height="40" uuid="bc17b089-90b0-44e2-bb19-5548f9cb77f0"/>
+				<imageExpression><![CDATA[$P{LOGO_TCE}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="0" width="552" height="18" backcolor="#3333FF" uuid="15b60162-34da-466c-a173-17c0d19cc1e6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="53" y="0" width="67" height="18" forecolor="#FFFFFF" uuid="4fbc5945-eb28-49eb-a15a-68d904645e65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GRUPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="0" width="50" height="18" forecolor="#FFFFFF" uuid="42b9cb17-55d4-4caa-bda4-b8dad7202a6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="52" height="18" forecolor="#FFFFFF" uuid="3fbad703-ff1d-4958-b73d-f130081b36d8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="0" width="144" height="18" forecolor="#FFFFFF" uuid="27088661-0e9c-472a-99fb-be982e073233"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SELEÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="63" height="18" forecolor="#FFFFFF" uuid="61afe889-98ba-4c55-a525-17788ca9c8ac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="0" width="165" height="18" forecolor="#FFFFFF" uuid="9b55eabf-ce00-431f-a0df-32a368548a09"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SELEÇÃO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<rectangle>
+				<reportElement key="rectangle-2" positionType="Float" stretchType="RelativeToBandHeight" x="2" y="2" width="554" height="16" forecolor="#EFEFEF" backcolor="#EFEFEF" uuid="16cb8e61-8244-42e9-8a2c-7495076980e0">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="3" y="1" width="50" height="16" uuid="858d6707-480e-45ab-87f6-7b9b0932a45d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{IDJOGO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="53" y="1" width="67" height="16" uuid="4993226b-098c-41de-96d8-db3b07f054f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{NMGRUPO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="285" y="0" width="31" height="18" uuid="dda550a9-0c92-4ff2-988a-911dd0f2ea1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{GOL1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="120" y="1" width="52" height="16" uuid="a27e7f4b-697f-4203-897c-117ebfb4755e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DTJOGO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="172" y="1" width="113" height="16" uuid="9396a247-b68f-4786-9ed1-fe51c3c5940a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SELECAO1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="411" y="2" width="133" height="16" uuid="3980f32c-31e9-4166-a9b9-4a960dc63a48"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SELECAO2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="379" y="0" width="32" height="18" uuid="27feb046-5c65-4a15-984c-0f7055688f5a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{GOL2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="316" y="0" width="63" height="18" forecolor="#000000" backcolor="#000000" uuid="4c31a67d-d0fc-4489-9cdd-d97ecd01ffbf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="2" width="554" height="1" uuid="890f1752-1da7-413b-b09c-952f48a38ec5"/>
+			</line>
+			<staticText>
+				<reportElement x="107" y="3" width="366" height="16" uuid="87a8fd9e-118a-446d-ab9c-225363e42436"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[@Copyright - Bolão Copa do Mundo]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-5" x="531" y="3" width="25" height="16" uuid="74eb5d10-4b85-4e41-8e2e-0bcb42174d11"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-4" x="474" y="3" width="57" height="16" forecolor="#000000" uuid="c6457b9c-92a1-4be8-8cb3-d16f8028e639"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement key="textField-5" x="3" y="3" width="100" height="16" forecolor="#000000" uuid="ef87cff7-cdf1-465e-b479-6a7be0c4c600"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

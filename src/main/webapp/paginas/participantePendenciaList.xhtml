@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<h1>Participantes</h1>
+
+		<h:form id="form">
+			
+
+			<p:messages autoUpdate="true" errorClass="errorMessage" />
+		
+				<p:dataTable id="lista" lazy="true"
+					value="#{participanteListBean.model}" var="item"
+					paginatorPosition="bottom" paginator="true" rows="10"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,15,20" styleClass="table table-sm table-striped table-hover"
+					emptyMessage="Não há registros">
+
+					<p:column headerText="STS">
+						<p:outputPanel rendered="#{item.ativo == true}">
+							<span class="badge badge-pill badge-success"><i class="fas fa-check-circle"></i></span>
+						</p:outputPanel>
+						<p:outputPanel rendered="#{item.ativo == false}">
+							<span class="badge badge-pill badge-danger"><i class="fas fa-ban"></i></span>
+						</p:outputPanel>
+					</p:column>
+
+					<p:column headerText="NOME">
+						#{item.nome}<br />
+						<span class="badge badge-pill badge-light">#{item.username}</span>
+					</p:column>
+
+					<p:column headerText="E-MAIL">
+						<h:outputText value="#{item.email}" />
+					</p:column>
+
+					<p:column headerText="CONTATO">
+						<h:outputText value="#{item.contato}" />
+					</p:column>
+
+					<p:column headerText="TELEFONE">
+						<h:outputText value="#{item.telefone}" />
+					</p:column>
+					<p:column headerText="PENDENCIA JOGO">
+						<h:outputText value="#{item.apostJogoPendente}" />
+					</p:column>
+					<p:column headerText="PENDENCIA GRUPO">
+						<h:outputText value="#{item.apostaGrupoPendente}" />
+					</p:column>
+
+					<p:column headerText="">
+						<p:commandButton id="EnviarEmail"
+							styleClass="btn btn-light btn-sm"
+							action="#{participanteListBean.EnviarEmailPEndemcia}"
+							value="Enviar Email">						
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+		</h:form>
+	
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="content">
+		<h1>Novo Grupo</h1>
+		<f:metadata>
+			<f:viewParam name="idgrupo" id="idgrupo"
+				value="#{grupoFormBean.grupoId}" />
+			<f:event type="preRenderView" listener="#{grupoFormBean.prepara}">
+			</f:event>
+		</f:metadata>
+
+
+		<h:form id="formulario">
+			<p:messages autoUpdate="true" errorClass="errorMessage" />
+
+			<h:panelGroup rendered="#{grupoFormBean.alterar == true}">
+				<div>
+					<label for="">ID</label>
+					<div>
+						<p:inputText disabled="true" value="#{grupoFormBean.grupo.id}" styleClass="form-control" />
+					</div>
+				</div>
+			</h:panelGroup>
+
+			<div class="input-box box-50">
+				<label for="">Nome *</label>
+				<div class="conteiner">
+					<p:inputText id="nome" value="#{grupoFormBean.grupo.nome}"
+						required="true" disabled="#{grupoFormBean.naopermitirEdicao}"
+						requiredMessage="O nome é obrigatório." maxlength="100"
+						styleClass="form-control" />
+				</div>
+			</div>
+
+			<hr />
+
+			<p:commandButton action="#{grupoFormBean.salvar}" value="Salvar"
+				update="formulario" styleClass="btn btn-primary btn-sm" />
+
+			<p:commandButton id="voltar" immediate="true" value="Voltar"
+				action="#{grupoListBean.limpaTela}"
+				styleClass="btn btn-light btn-sm" />
+
+			<p:commandButton id="limpaTela" immediate="true" value="Limpar"
+				action="#{grupoFormBean.limpaTela}" update="formulario"
+				title="Limpar formulario" styleClass="btn btn-light btn-sm" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>

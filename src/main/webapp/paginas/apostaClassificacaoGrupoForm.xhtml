@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<h1>Aposta Classificação Grupo</h1>
+		
+			<div class="ui-messages ui-widget">
+			<div class="ui-messages-info ui-corner-all">
+				<span class="ui-messages-info-icon"></span>
+				<ul>
+					<li><span class="ui-messages-info-summary">A ordem dos times no painel a direita representa seu palpite para os classificados por grupo. </span></li>
+					<li><span class="ui-messages-info-summary">Para cada grupo, clique no botão salvar, após ter efetuado as suas escolhas. </span></li>
+				</ul>
+			</div>
+		</div>
+
+		<f:metadata>
+			<f:viewParam name="idClassificacaoGrupo" id="idClassificacaoGrupo"
+				value="#{apostaClassificacaoGrupoFormBean.classificacaoGrupoId}" />
+			<f:event type="preRenderView"
+				listener="#{apostaClassificacaoGrupoFormBean.init}" />
+		</f:metadata>
+
+		<h:form styleClass="formularios" id="formulario">
+			<div class="form-row">
+					<div class="input-group mb-3 col-12">
+						<div class="input-group-prepend">
+	     					<label class="input-group-text" for="grupo">Grupos</label>
+	  					</div>
+						<p:selectOneMenu id="grupo_select"
+							value="#{apostaClassificacaoGrupoFormBean.grupoSelecionado}"
+							converter="entityConverter" required="false"
+							styleClass="custom-select">
+							<f:selectItem id="selecioneGrupo" itemLabel="Selecione..."
+								style="width: 299px;" />
+							<f:selectItems value="#{classificacaoGrupoListBean.opcaoGrupo}"
+								var="grupo" itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
+							<p:ajax listener="#{apostaClassificacaoGrupoFormBean.consultarGrupo}"
+								update="pojoPickList,salvar " event="change" />
+						</p:selectOneMenu>
+
+				  	</div>
+			</div>
+		
+		
+		
+
+			<p:growl id="msg" showDetail="false" escape="false" />
+			<fieldset>
+				<p:messages infoClass="infoMessage" errorClass="errorMessage"
+					rendered="true" />
+				<h:panelGroup
+					rendered="#{apostaClassificacaoGrupoFormBean.alterar == true}">
+
+					<!-- <div class="input-box box-10 mg-bottom-10">
+				<h:outputText value="ID" />
+				<div class="conteiner">
+					<h:inputText disabled="true" value="#{apostaClassificacaoGrupoFormBean.ClassificacaoGrupo.id}" />
+				</div>
+			</div> -->
+				</h:panelGroup>
+
+				<p:pickList id="pojoPickList"
+					value="#{apostaClassificacaoGrupoFormBean.selecoes}" var="selecao"
+					itemValue="#{selecao}" itemLabel="#{selecao.nome}"
+					converter="primeFacesPickListConverter" showSourceControls="false"
+					showTargetControls="false" showCheckbox="true"
+					showSourceFilter="true" showTargetFilter="true"
+					filterMatchMode="contains"
+					styleClass="tabela-aposta-grupo">
+
+					<f:facet name="sourceCaption" styleClass="border">Seleções</f:facet>
+					<f:facet name="targetCaption">Classificação</f:facet>
+
+					<p:ajax event="transfer"
+						listener="#{apostaClassificacaoGrupoFormBean.onTransfer}"
+						update="msg,salvar" />
+
+					<p:column style="width:25%" >
+						<p:graphicImage value="../img/#{selecao.id}.png" width="30"
+							height="30" />
+					</p:column>
+
+					<p:column style="width:75%;">#{selecao.nome}</p:column>
+
+				</p:pickList>
+				
+				<div>
+
+				
+				</div>
+
+			</fieldset>
+
+			<hr />
+			<p:commandButton id="voltar" immediate="true" value="Voltar"
+				styleClass="btn btn-sm"
+				action="#{apostaClassificacaoGrupoFormBean.voltar}" />
+			<p:commandButton id="limpaTela" value="Limpar"
+				action="#{apostaClassificacaoGrupoFormBean.limpaTela}" update="formulario"
+				title="Limpar Formulário"
+				styleClass="btn btn-sm" immediate="true" />
+			<p:commandButton id="relatorio"
+				 value="Vizualizar Palpites"
+				 actionListener="#{apostaClassificacaoGrupoFormBean.relatorio}" 
+				 styleClass="btn btn-sm btn-secondary"
+				 ajax="false"
+									 />
+			<p:commandButton id="salvar"
+				action="#{apostaClassificacaoGrupoFormBean.salvar}" value="Salvar"
+				styleClass="btn btn-sm btn-copa" update="formulario"
+				disabled="#{!apostaClassificacaoGrupoFormBean.permiteSalvar}" />
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>

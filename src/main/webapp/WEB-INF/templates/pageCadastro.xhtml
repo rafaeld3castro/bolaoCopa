@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"  >
+
+    <h:head>
+   	<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1" />
+   	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"/>
+        <title>BCM - Bolão da Copa do Mundo</title>
+        <link rel="stylesheet" type="text/css" media="all" href="/bolaoCopaDoMundo/css/geral.css" />
+        <link rel="shortcut icon" href="/bolaoCopaDoMundo/ico.png" />
+        <script type="text/javascript" src="/bolaoCopaDoMundo/js/jquery-3.3.1.min.js"/>
+        <script type="text/javascript" src="/bolaoCopaDoMundo/js/js-effects.js"></script>  
+        
+    </h:head>
+    <h:body>
+
+    	<f:view>
+		<div class="topo">
+				<div class="container p-3">
+					<div class="row">
+						<div class="col-9">
+							<span class="titulo">BOLÃO COPA DO MUNDO 2018</span><br /><br />
+		
+							<ui:include src="menu.xhtml"/>	
+						</div>
+		
+						<div class="col-3 text-right">
+							<!--  <p:graphicImage url="../img/mascote.png" styleClass="img-fluid" /> -->
+							<p:graphicImage url="img/logo-copa-vertical.png" styleClass="img-fluid" />
+						</div>
+					</div>
+				</div>         
+		    </div>    
+	        <div class="container">
+				<ui:insert name="content">
+					conteudo da pagina!!!
+				</ui:insert>
+	
+	            <footer>
+	            	<p>© Copyright 2018</p>
+	            </footer>
+	        </div>
+
+    	</f:view>
+
+    </h:body>
+    
+    <script type="text/javascript" src="/bolaoCopaDoMundo/js/bootstrap.min.js"/>
+</html>

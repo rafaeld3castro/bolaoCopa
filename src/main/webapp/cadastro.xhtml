@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="WEB-INF/templates/login.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="content">
+		<h1>Cadastro de Novo Usuário</h1>
+
+		<h:form id="formulario" styleClass="">
+			<p:messages autoUpdate="true" errorClass="errorMessage" />
+				<div class="form-row">
+   					<div class="col">
+						<label for="nome">Nome *</label>
+						<p:inputText id="nome"
+								value="#{participanteFormBean.participante.nome}"
+								required="true" requiredMessage="O nome é obrigatório"
+								maxlength="150"
+								styleClass="form-control" />
+					</div>
+					
+					<div class="col">
+						<label>Login *</label>
+						<p:inputText id="login"
+								value="#{participanteFormBean.participante.username}"
+								required="true" requiredMessage="O login é obrigatório."
+								maxlength="30"
+								styleClass="form-control" />
+					</div>
+				</div>
+				
+				<div class="form-row">
+   					<div class="col">
+						<label>Senha *</label>
+							<p:password id="senha"
+								value="#{participanteFormBean.participante.password}"
+								required="true" requiredMessage="A senha é obrigatória."
+								maxlength="32" feedback="true"
+								promptLabel="Por favor, digite uma senha" weakLabel="Fraco"
+								goodLabel="Médio" strongLabel="Forte" match="confirmarSenha"
+								validatorMessage="Erro ao confirmar a senha"
+								styleClass="form-control" />
+					</div>
+					
+					<div class="col">
+						<label>Redigite a Senha *</label>
+						<div class="conteiner">
+							<p:password id="confirmarSenha"
+								value="#{participanteFormBean.confirmarSenha}" required="true"
+								requiredMessage="Redigitar a senha é obrigatório."
+								maxlength="32"
+								styleClass="form-control" >
+							</p:password>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-row">
+   					<div class="col">
+						<label>E-mail *</label>
+							<p:inputText id="email"
+								value="#{participanteFormBean.participante.email}"
+								maxlength="50" required="true"
+								requiredMessage="O email é obrigatório."
+								type="email" 
+								styleClass="form-control" />
+					</div>
+					
+					<div class="col">
+						<label>Telefone *</label>
+						<p:inputMask id="telefone"
+	                                value="#{participanteFormBean.participante.telefone}"
+	                                mask="(99) 99999-9999" required="true"
+	                                requiredMessage="O telefone é obrigatório." maxlength="30" 
+	                                styleClass="form-control" />
+					</div>
+				</div>
+					
+				<div class="form-row">				
+					<div class="col-6">
+						<label>Trabalha no Tribunal de Contas(TCE)?</label>
+						<div class="form-check">
+						<p:selectOneRadio id="contatorRadio" required="true"
+							value="#{participanteFormBean.contatoOpcao}">
+							<f:selectItem itemLabel="Sim" itemValue="1"  styleClass="form-check-input" />
+							<f:selectItem itemLabel="Não" itemValue="2" />
+							<p:ajax update="content"
+								listener="#{participanteFormBean.selecionaContato}"
+								event="valueChange" />
+						</p:selectOneRadio>
+						</div>
+					</div>
+					<div class="col-6">
+						<h:panelGroup layout="block" id="content"
+							style="#{participanteFormBean.contatoOpcao==1 or participanteFormBean.contatoOpcao==0? 'display : none;' : ''};">
+							<label>Informe o nome do seu contato no Tribunal de Contas (TCE)</label>
+							<p:inputText id="contato"
+								value="#{participanteFormBean.participante.contato}"
+								required="true" requiredMessage="O contato é obrigatório."
+								maxlength="30"
+								styleClass="form-control" >
+								<f:validateLength maximum="30" />
+							</p:inputText>
+						</h:panelGroup>
+					</div>					
+				</div>	
+
+			<p:blockUI block="formulario" trigger="salvar">
+				Salvando<br />
+        		<p:graphicImage value="/img/ajax-loader.gif"/>
+        	</p:blockUI>
+
+			<hr />
+
+			<p:button id="voltar" value="Voltar" outcome="login"
+				styleClass="btn btn-sm btn-secondary float-left" />
+
+			<p:commandButton id="limpaTela" immediate="true" value="Limpar"
+				action="#{participanteFormBean.limpaTelaCadastro}"
+				update="formulario" styleClass="btn btn-sm btn-secondary float-left"
+				ajax="false" />
+
+			<p:commandButton action="#{participanteFormBean.salvarCadastro}"
+				id="salvar" value="Salvar" update="formulario, :form2"
+				styleClass="btn btn-sm btn-copa float-right" />
+
+
+
+		</h:form>
+
+		<p:dialog id="popup" header="Participante" widgetVar="dlg"
+			resizable="false" modal="true" width="400">
+			<h:form id="form2">
+				<div>
+					<div>Cadastro foi efetuado com sucesso!</div>
+					<div style="margin-top: 5px;">Por enquanto sua conta está
+						desativada, mas será, imediatamente, ativada após o pagamento
+						referente a sua inscrição. O valor pode ser consultado nas regras
+						desse Bolão.</div>
+					<div>Você receberá um email com mais informações sobre seu
+						cadastro.</div>
+					<div>Em caso de dúvidas entre em contato com o Administrador
+						atraves do email:</div>
+					<div style="margin-left: 20px; color: blue;">
+						bolaocopadomundofc@gmail.com</div>
+					<div style="margin-top: 5px;">Atenciosamente.</div>
+					<p:button id="login" value="Voltar para tela de Login"
+						outcome="login" styleClass="fr mg-left-15 mg-bottom-15" />
+				</div>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

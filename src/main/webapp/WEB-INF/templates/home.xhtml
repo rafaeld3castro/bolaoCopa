@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+<h:head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>BCM - Bolão da Copa do Mundo</title>
+	<link rel="stylesheet" type="text/css" media="all"
+		href="/bolaoCopaDoMundo/css/geral.css" />
+	<link rel="shortcut icon" href="/bolaoCopaDoMundo/favicon.ico" />
+	<script type="text/javascript"
+		src="/bolaoCopaDoMundo/js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="/bolaoCopaDoMundo/js/js-effects.js"></script>
+
+</h:head>
+<h:body>
+
+	<f:view>
+
+		<div class="geral">
+
+			<div class="conteiner-geral">
+
+				<div class="topo">
+
+					<h1>
+						<a href="#" title=""> bolaoTCE </a>
+
+					</h1>
+
+
+
+					<!-- <h2 class="logo-tce">
+                        Tribunal de Contas do Estado  do CearÃ¡
+                    </h2> -->
+
+					<!-- <div class="manual-bolaoTCE" style="margin-top: -10px; cursor:pointer;float:right;margin-right:191px;margin-top:-102px;">
+                          <a href="/sca/manual-bolaoTCE/manual-bolaoTCE.pdf" target="_blank">Manual do Usuário</a>
+					</div>  -->
+
+<!-- 					<p:menubar id="menuAdmin">
+						<p:submenu label="Administração">
+							<p:submenu label="Tabelas">
+								<p:menuitem value="Grupo" url="/paginas/grupoList.faces" />
+								<p:menuitem value="Seleção" url="/paginas/selecaoList.faces" />
+							</p:submenu>
+							<p:submenu label="Cadastros">
+								<p:menuitem value="Participante"
+									url="/paginas/participanteList.faces" />
+								<p:menuitem value="Jogos" url="/paginas/jogosList.faces" />
+								<p:menuitem value="Classificação Grupo"
+									url="/paginas/classificacaoGrupoList.faces" />
+							</p:submenu>
+						</p:submenu>
+					</p:menubar> -->
+
+					<div class="login-box">
+
+						<!--             	<h:form>
+                        <h2 class="dn">Login</h2>
+
+                        <p>Olá, <span class="user"><h:outputText value="#{LoginBean.usuarioLogado}" /></span></p>
+
+                        <h:outputLink title="Sair" 
+                        	value="#{facesContext.externalContext.requestContextPath}/logout.jsp">
+							<h:outputText value="Sair"/>
+						</h:outputLink>
+						</h:form> -->
+					</div>
+
+				</div>
+
+				<div class="menu-principal">
+
+					<ui:include src="menu.xhtml" />
+
+				</div>
+
+				<div class="menu-user">
+
+					<ui:include src="menuUser.xhtml" />
+
+				</div>
+
+				<div class="corpo">
+
+					<div class="corpo-conteiner">
+
+						<div class="titulo-pagina center">
+
+							<h2>Bem-vindo ao bolaoTCE</h2>
+
+						</div>
+
+						<div class="box-border">
+
+							<div class="welcome-col">
+								<p></p>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="rodape">
+					<div class="rodape-box">
+						<p>
+							© Copyright 2018 <a href="regras.faces"
+								style="margin-left: 19px;">Regras</a>
+						</p>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</f:view>
+
+</h:body>
+</html>

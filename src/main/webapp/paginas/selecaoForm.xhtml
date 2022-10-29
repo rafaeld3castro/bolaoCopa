@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<h2>Nova Seleção</h2>
+
+		<f:metadata>
+			<f:viewParam name="idselecao" id="idselecao"
+				value="#{selecaoFormBean.selecaoId}" />
+			<f:event type="preRenderView" listener="#{selecaoFormBean.init}" />
+		</f:metadata>
+
+		<h:form id="formulario">
+			<p:messages infoClass="infoMessage" errorClass="errorMessage"
+					rendered="true" />
+
+			<h:panelGroup rendered="#{selecaoFormBean.alterar == true}">
+					<div class="input-box box-10 mg-bottom-10">
+						<h:outputText value="ID" />
+						<div class="conteiner">
+							<h:inputText disabled="true"
+								value="#{selecaoFormBean.selecao.id}" />
+						</div>
+					</div>
+				</h:panelGroup>
+				
+			<div class="form-row">
+				<div class="col-6">
+					<h:outputText value="Nome *" />
+					<div class="conteiner">
+						<p:inputText id="nome" value="#{selecaoFormBean.selecao.nome}"
+							required="true" requiredMessage="O nome é Obrigatório" styleClass="form-control" />
+					</div>
+				</div>
+
+				<div class="col-6">
+					<h:outputText value="Grupo* " />
+					<div class="conteiner ">
+						<p:selectOneMenu id="grupo_select"
+							value="#{selecaoFormBean.grupoSelecionado}"
+							converter="entityConverter" required="true"
+							styleClass="custom-select form-control"
+							disabled="#{selecaoFormBean.alterar}">
+							<f:selectItem id="selecioneGrupo" itemLabel="Selecione..."
+								 />
+							<f:selectItems value="#{selecaoFormBean.grupos_list}" var="grupo"
+								itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+
+			</div>
+			
+			<hr />
+
+			<p:commandButton action="#{selecaoFormBean.salvar}" value="Salvar"
+				styleClass="btn btn-primary btn-sm" update="formulario" />
+
+			<p:commandButton id="voltar" immediate="true" value="Voltar"
+				styleClass="btn btn-light btn-sm"
+				action="#{selecaoListBean.limpaTela}" />
+
+			<p:commandButton id="limpaTela" value="Limpar"
+				action="#{selecaoFormBean.limpaTela}" update="formulario"
+				title="Limpar Formulário"
+				styleClass="btn btn-light btn-sm" immediate="true" />
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

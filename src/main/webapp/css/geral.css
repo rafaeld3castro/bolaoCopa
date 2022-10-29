@@ -1,0 +1,55 @@
+@import  url("bootstrap.min.css");
+@import  url("fontawesome-all.min.css");
+@import url('https://fonts.googleapis.com/css?family=Arima+Madurai:100,200,300,400,500,700,800,900');
+
+html, body { font-family: 'Arima Madurai', cursive; font-weight:400; background: #000000 url(../img/bg-vermelho.jpg) top center fixed;}
+
+a { color:#E30613; }
+a:hover { color:#B10D0C; }
+
+footer { text-align: center; padding: 10px 0; }
+
+.topo {color:#fff; font-family: 'Arima Madurai', cursive; font-weight:900; }
+.topo .container { background: none; }
+.topo img{ max-height:120px; } 
+.topo .titulo { font-size:35px }
+.btn-copa { background-color:#E30613; color:#fff; font-weight:bold; text-transform:uppercase }
+.btn-copa:hover { background-color:#B10D0C; color:#fff; }
+.login-corpo { background: #fff; padding: 20px; }
+
+
+
+/* BOOTSTRAP */
+.btn {font-weight:bold; text-transform:uppercase; }
+.navbar { padding-left:0; }
+.navbar-expand-lg .navbar-nav .nav-link { padding-left:0; margin-right:20px }
+.navbar-light .navbar-nav .nav-link { color:#fff; text-transform:uppercase }
+.navbar-light .navbar-nav .nav-link:hover { color:#fff; text-decoration:underline; }
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link { color:#fff; }
+.container { background: #fff; padding-top: 20px}
+.container-login { background: none; }
+
+/* PRIMEFACES */
+.ui-datatable thead th { border-left: none; border-right:none; text-align:left }
+.ui-datatable tbody td, .ui-datatable tfoot td { padding:0; border: none; }
+.ui-selectonemenu-panel .ui-selectonemenu-list { background: #fff; }
+.ui-icon { text-indent:  inherit; }
+.ui-datepicker, .ui-growl { background:#fff; }
+.ui-button-icon-only .ui-button-text { padding: 0; display: none;}
+.ui-picklist-button-add::before{ font-family: Font Awesome\ 5 Free; content: "\f0fe"; color:#000;  }
+.ui-picklist-button-add-all::before{ font-family: Font Awesome\ 5 Free; content: "\f0fe"; color:#000; font-weight:900}
+.ui-picklist-button-remove-all::before{ font-family: Font Awesome\ 5 Free; content: "\f146"; color:#000; font-weight:900 }
+.ui-picklist-button-remove::before{ font-family: Font Awesome\ 5 Free; content: "\f146"; color:#000; }
+.ui-dialog { background: #fff; }
+.ui-selectonemenu-panel { background: #fff; }
+.ui-paginator-next::before{ font-family: Font Awesome\ 5 Free; content: "\f105"; color:#000; font-weight: 900;}
+.ui-paginator-prev::before{ font-family: Font Awesome\ 5 Free; content: "\f104"; color:#000; font-weight: 900;}
+.ui-paginator-first::before{ font-family: Font Awesome\ 5 Free; content: "\f100"; color:#000; font-weight: 900;}
+.ui-paginator-last::before{ font-family: Font Awesome\ 5 Free; content: "\f101"; color:#000; font-weight: 900;}
+.ui-radiobutton-icon::before{ font-family: Font Awesome\ 5 Free; content: "\f192"; color:#000; font-weight: 400;}
+.ui-radiobutton-box{ display:none; }
+.ui-icon { text-indent: -99999px; display:none; }
+.ui-state-hover, .ui-state-focus { background: #fff; }
+.ui-helper-hidden-accessible { position: relative !important; }
+.ui-selectonemenu input{ display:none;  }
+

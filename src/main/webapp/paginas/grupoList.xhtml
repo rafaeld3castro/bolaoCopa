@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+		<h1>Grupos</h1>
+
+		<h:form id="form">
+			
+			<p:commandButton id="incluir" value="Novo Grupo"
+				action="#{grupoFormBean.prepareIncluir}"
+				styleClass="btn btn-secondary btn-sm"
+				title="Ir para formulario de criação de grupo" />
+			
+
+				
+			<hr />		
+				
+			<div class="form-row">
+				<div class="input-group mb-3">
+					<div class="input-group">
+						<div class="input-group-prepend">
+    						<label class="input-group-text" for="grupo">Grupos</label>
+  						</div>					
+						<p:inputText id="grupo" value="#{grupoListBean.nome}"
+								title="Busca por nome do grupo"
+								styleClass="form-control form-control-sm" />
+						<div class="input-group-append">
+							<p:commandButton	id="consultar"
+												value="Consultar"
+												action="#{grupoListBean.consultar}"
+												update="lista"
+												styleClass="btn btn-secondary btn-sm"
+												 />
+							<p:commandButton id="limpaTela" value="Limpar"
+								action="#{grupoListBean.limpaTela}" update="lista, grupo"
+								styleClass="btn btn-sm" />
+		  				</div>
+					
+				</div>
+			</div>
+		</div>
+			
+			<br />
+			
+			<p:messages autoUpdate="true" errorClass="errorMessage" />			
+
+			<p:dataTable id="lista" value="#{grupoListBean.modelo}" var="item"
+				paginator="true" rows="10" paginatorPosition="bottom" lazy="true"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,15,20,25" emptyMessage="Não há registros"
+				styleClass="table table-sm table-striped table-hover">
+
+				<p:column id="col1" headerText="ID" styleClass="text-left">
+					<h:outputText id="item1" value="#{item.id}" />
+				</p:column>
+
+				<p:column id="col2" headerText="Nome" styleClass="text-left">
+					<h:outputText id="item2" value="#{item.nome}" />
+				</p:column>
+
+				<p:column id="col3" styleClass="text-right">
+					<h:link id="editar" value="Editar" styleClass="btn btn-sm btn-secondary"
+						outcome="/paginas/grupoForm">
+						<f:param name="idgrupo" value="#{item.id}" />
+					</h:link>
+					&nbsp;
+					<p:commandLink id="excluir" value="Excluir"
+						action="#{grupoListBean.excluir}" styleClass="btn btn-sm btn-danger"
+						onclick="var x = confirm('Deseja realmente excluir o registro?');if(!x){return false;}">
+						<f:setPropertyActionListener target="#{grupoListBean.grupo}"
+							value="#{item}" />
+					</p:commandLink>
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

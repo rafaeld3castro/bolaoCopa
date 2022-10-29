@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="WEB-INF/templates/pageCadastro.xhtml"
+	  xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:p="http://primefaces.org/ui"
+ 	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+ 	  xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+	<ui:define name="content">
+
+		<div class="titulo-pagina">
+			<h2>Regras</h2>
+		</div>
+		
+		<h:form id="formulario" styleClass="formularios">
+		<div class="p-regras">
+			<p:dialog></p:dialog>
+			<p:fieldset legend="InformaÃ§Ãµes Gerais" toggleable="true" toggleSpeed="500"> 
+					<p>1. PreÃ§o da Cartela R$ 50,00.</p>
+					<p>2. Cada Participante poderÃ¡ fazer quantas cartelas quiser, porÃ©m apuradas isoladamente.</p>
+					<p>3. Prazo de cadastro das apostas vai atÃ© o dia 11/06/2014.</p>
+					<p>4. O apostador deve preencher seus palpites para todos os jogos da primeira fase,
+					 bem como, o primeiro e o segundo colocado de cada grupo. Caso nÃ£o o faÃ§a, o mesmo nÃ£o ganharÃ¡ a pontuaÃ§Ã£o dos palpites em branco.</p>
+					<p class="mg-top-18" style="color: red">Obs.: A partir do dia 12 de junho,  todas as apostas estarÃ£o disponÃ­veis para qualquer 
+					participante acessar, ou seja, todos poderÃ£o conferir o palpite dos participantes 
+					do bolÃ£o facilitando, dessa forma, um melhor acompanhamento. VocÃª tambÃ©m 
+					receberÃ¡ via email um PDF com todas as apostas dos participantes, garantindo a lisura do BolÃ£o.</p>
+			</p:fieldset>
+			<p:fieldset legend="PremiaÃ§Ã£o" toggleable="true" toggleSpeed="500" collapsed="true"> 	
+					<p>O valor do prÃªmio serÃ¡ o total arrecadado pago aos quatros primeiros colocados.</p>
+					<p>SerÃ£o considerados vencedores os quatros participantes que, ao 
+					final dos 48 jogos da primeira fase obtiverem melhor aproveitamento 
+					no sistema de pontuaÃ§Ã£o do bolÃ£o(Pontos obtidos nos jogos e pontos obtidos nas classificaÃ§Ã£o de cada grupo). O prÃªmio serÃ¡ pago nas seguintes proporÃ§Ãµes:</p>
+					<div class="mg-top-8">
+						<div class="mg-left-15">
+							<p>1Âº colocado: 60% do total arrecadado;</p>
+							<p>2Âº colocado: 25% do total arrecadado;</p>
+							<p>3Âº colocado: 10% do total arrecadado;</p>
+							<p>4Âº colocado: 5% do total arrecadado;</p>
+						</div>
+					</div>
+					<p class="mg-top-18">Para acompanhar o resultado parcial do bolÃ£o o participante poderÃ¡ 
+					utilizar a opÃ§Ã£o no menu ClassificaÃ§Ã£o. Ela estarÃ¡ sendo atualizada a cada partida.</p>
+			</p:fieldset>
+			<p:fieldset legend="CritÃ©rio de Desempate" toggleable="true" toggleSpeed="500" collapsed="true">
+				<p>Em caso de empate, os critÃ©rios a serem adotados serÃ£o os seguintes:</p>
+				<div class="mg-top-8">
+					<div class="mg-left-15">
+						<p>1Âº critÃ©rio: Maior numero de escores cheio;</p>
+						<p>2Âº critÃ©rio: Maior numero de pontos em jogos do Brasil;</p>
+						<p>3Âº critÃ©rio: Sorteio. Por exemplo: Se dois participantes empatarem na segunda colocaÃ§Ã£o, realiza-se um sorteio, quem ganhou fica com a segunda colocaÃ§Ã£o e o que perdeu fica com a terceira.</p>
+					</div>
+				</div>
+			</p:fieldset>
+			<p:fieldset legend="PontuaÃ§Ã£o" toggleable="true" toggleSpeed="500" collapsed="true">
+				<p>Os pontos serÃ£o atribuÃ­dos Ã s cartelas por cada jogo seguindo os critÃ©rios abaixo:</p>
+				<div class="mg-top-8">
+					<div class="mg-left-15">
+						<p>1) Escore em cheio ------------------------ 6 PONTOS</p>
+							<div class="mg-top-5">
+								<div class="mg-left-16">
+									<p style="color: red">Ex. Resultado do jogo 4x1 e sua aposta 4x1</p>
+								</div>
+							</div>
+						<div class="mg-top-8">
+							<p>2) Escore de um dos times --------------- 2 PONTOS </p>
+								<div class="mg-top-5">
+									<div class="mg-left-16">
+										<p style="color: red">Ex. Resultado do jogo 3x2 e sua aposta 3x1 ou 1x2</p>
+									</div>
+								</div>
+						</div>
+						
+						<div class="mg-top-8">
+							<p>3) Acertar o vencedor --------------------- 1 PONTO </p>
+								<div class="mg-top-5">
+									<div class="mg-left-16">
+										<p style="color: red">Ex. Resultado do jogo 3x2 e sua aposta 2x1</p>
+									</div>
+								</div>
+						</div>
+						
+						<div class="mg-top-8">
+							<p>4) Empate sem acertar o placar --------- 3 PONTOS </p>
+								<div class="mg-top-5">
+									<div class="mg-left-16">
+										<p style="color: red">Ex. Resultado do jogo 2x2 e sua aposta 3x3</p>
+									</div>
+								</div>
+						</div>
+						
+						<div class="mg-top-8">
+							<p>5) Os pontos dos itens "2" e "3" poderÃ£o ser acumulados.</p>
+								<div class="mg-top-5">
+									<div class="mg-left-16">
+										<p style="color: red">Ex. Resultado do jogo 3x0 e sua aposta 3x1, vc ganharÃ¡ 3 pontos (1 por acetar o 
+							vencedor e 2 por acertar o escore de um dos times)</p>
+									</div>
+								</div>
+						</div>
+						
+						<div class="mg-top-8">
+							<p>6) Nos jogos do brasil, os pontos serÃ£o contados em dobro.</p>
+							<div class="mg-top-5">
+									<div class="mg-left-16">
+										<p style="color: red">Ex. Resultado do jogo 2x0 e sua aposta 2x1, vc ganharÃ¡ 6 pontos (Dobrando os 3 pontos que vc ganha pelo critÃ©rio 5)</p>
+									</div>
+								</div>
+						</div>
+						
+						<div class="mg-top-8">
+							<p>7) 1Âº do Grupo ------------------------------ 5 PONTOS </p>
+								<div class="mg-top-5">
+									<div class="mg-left-16">
+										<p style="color: red">Ex.  Resultado da classificaÃ§Ã£o Brasil como o 1Âº do grupo e sua aposta foi Brasil como o 1Âº</p>
+									</div>
+								</div>
+							</div>
+						
+						<div class="mg-top-8">
+							<p>8) 2Âº do Grupo ------------------------------ 2 PONTOS </p>
+								<div class="mg-top-5">
+									<div class="mg-left-16">
+										<p style="color: red">Ex.  Resultado da classificaÃ§Ã£o Brasil como o 2Âº do grupo e sua aposta foi Brasil como o 2Âº</p>
+									</div>
+								</div>
+						</div>
+						
+						<div class="mg-top-8">
+							<p>9) Acertar os 2 classificados no GRUPO na ordem inversa
+							 de classificaÃ§Ã£o -------------------------- 3 PONTOS  </p>
+							 	<div class="mg-top-5">
+									<div class="mg-left-16">
+							 			<p style="color: red">Ex. Resultado da classificaÃ§Ã£o Brasil como o 1Âº do grupo e MÃ©xico 
+							 como o 2Âº e sua aposta foi MÃ©xico como o 1Âº do grupo e Brasil como o 2Âº</p>
+							 		</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</p:fieldset>
+			
+				<p:fieldset legend="Pagamento do BolÃ£o" toggleable="true" toggleSpeed="500" collapsed="true"> 	
+					<p>O valor de R$ 50,00 deverá ser pago ao administrador do bolÃ£o, caso tenha dificuldade para efetuar o pagamento com o mesmo, entre em contato atraves do email bolaodacopabrasil@gmail.com ou pelo telefone: (85)87533736</p>
+					<p>ApÃ³s a confirmaÃ§Ã£o do pagamento vocÃª receberÃ¡ um email informando a ativaÃ§Ã£o do seu usuÃ¡rio. SÃ³ entÃ£o vocÃª deve cadastrar suas apostas atÃ© o dia 11/06/2014.</p>
+					
+			</p:fieldset>
+			
+			<sec:isAnonymous>
+				<p:button id="voltar"
+									 value="Voltar"
+									 outcome="login"
+									 styleClass="fr mg-bottom-10"
+									 />
+			</sec:isAnonymous>
+			
+			<sec:isAuthenticated>
+				<p:button id="voltar"
+									 value="Voltar"
+									 outcome="home"
+									 styleClass="fr mg-bottom-10"
+									 />
+			</sec:isAuthenticated>
+			
+			
+		</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

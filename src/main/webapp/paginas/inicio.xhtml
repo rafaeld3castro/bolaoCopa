@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition template="../WEB-INF/templates/page.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+
+	<ui:define name="content">
+
+		<p:outputPanel rendered="#{inicioBean.apostasGolNull == 0}">
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			Você já completou suas apostas de jogos!
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">x</span>
+  			</button>
+		</div>
+		</p:outputPanel>
+		
+		<p:outputPanel rendered="#{inicioBean.apostasGolNull > 0}">
+		<div class="ui-messages ui-widget">
+			<div class="ui-messages-warn ui-corner-all">
+				<span class="ui-messages-warn-icon"></span>
+				<ul>
+					<li><span class="ui-messages-warn-summary">Existem #{inicioBean.apostasGolNull} apostas de jogos incompletas!</span></li>
+				</ul>
+			</div>
+		</div>
+		</p:outputPanel>
+		
+		<p:outputPanel rendered="#{inicioBean.apostasPendentes == 0}">
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<b>Parabéns!</b> Você já completou suas apostas de grupos!
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	    			<span aria-hidden="true">X</span>
+	  			</button>
+  		</div>
+		</p:outputPanel>
+		
+		<p:outputPanel rendered="#{inicioBean.apostasPendentes > 0}">
+		<div class="ui-messages ui-widget">
+			<div class="ui-messages-warn ui-corner-all">
+				<span class="ui-messages-warn-icon"></span>
+				<ul>
+					<li><span class="ui-messages-warn-summary">Existem #{inicioBean.apostasPendentes} apostas de grupos incompletas!</span></li>
+				</ul>
+			</div>
+		</div>
+		</p:outputPanel>
+
+		<p:messages infoClass="infoMessage" errorClass="errorMessage"
+			showDetail="true" autoUpdate="false"
+			rendered="#{inicioBean.jogos != null}" />
+			
+			
+		<div class="row">
+			<div class="col-8" >
+				<p:outputPanel rendered="#{inicioBean.classificacaoList.size() != 0}">						
+					<h2>NOTÍCIAS</h2>
+					
+					<p>Seja bem-vindo ao Bolão da Copa do Mundo 2018, além da
+						premiação, o intuito desse bolão é acompanhar toda copa de uma
+						maneira mais emocionante. O Bolão é válido em toda primeira fase
+						da copa, com início em 14/06/2018 e encerramento em 28/06/2018.</p>
+					<p>Utilize o menu de navegação no alto, para consultar as
+						regras do Bolão, fazer suas apostas, consultar sua classificação,
+						simular resultados e tirar suas dúvidas. Um arquivo PDF com todas
+						as apostas válidas dos participantes será enviado para garantir da
+						apuração do resultado. Cada vez, que a classificação for
+						atualizada você receberá um e-mail informando a colocação dos
+						participantes.</p>
+					<p>Na opção "Minhas Apostas" no menu, você deve cadastrar seus palpite nos resultados dos jogos e quais seleções irão
+						passar para próxima fase. Verifique se nção esqueceu nenhum palpite, você deve finalizar suas apostas até o
+						dia 13/06/2018.</p>
+					<p>Então, espero que todos se divirtam e BOA SORTE!</p>
+					<p>Total Participantes cadastrados: #{inicioBean.totalParticipantes}</p>
+					<p>Total ativos: #{inicioBean.totalParticipantesAtivos}</p>
+					<p>Total arrecadado:  #{inicioBean.totalParticipantesAtivos*80}</p>
+					
+					<p:dataTable id="lista" lazy="true" value="#{inicioBean.model}"
+						rowIndexVar="rowIndex" var="item" paginatorPosition="bottom"
+						paginator="false" rows="10" styleClass="tabela-dados">
+	
+						<p:column styleClass="center" headerText="Class.">
+							<h:outputText value="#{rowIndex+1}" />
+						</p:column>
+	
+						<p:column headerText="NOME">
+							<h:outputText value="#{item.participante.nome}" />
+						</p:column>
+	
+						<p:column styleClass="center" headerText="Total">
+							<h:outputText value="#{item.totalPontos}" />
+						</p:column>
+	
+					</p:dataTable>
+				</p:outputPanel>
+			
+				<p:outputPanel rendered="#{inicioBean.classificacaoList.size() == 0}">
+					<h2>NOTÍCIAS</h2>		
+					<p>Seja bem-vindo ao Bolão da Copa do Mundo 2018, além da
+						premiação, o intuito desse bolão é acompanhar toda copa de uma
+						maneira mais emocionante. O Bolão é válido em toda primeira fase
+						da copa, com início em 14/06/2018 e encerramento em 28/06/2018.</p>
+
+					<p>Utilize o menu de navegação no alto, para consultar as
+						regras do Bolão, fazer suas apostas, consultar sua classificação,
+						simular resultados e tirar suas dúvidas. Um arquivo PDF com todas
+						as apostas válidas dos participantes será enviado para garantir da
+						apuração do resultado. Cada vez, que a classificação for
+						atualizada você receberá um e-mail informando a colocação dos
+						participantes.</p>
+
+					<p>Na opção "Minhas Apostas" no menu, você deve cadastrar seus palpite nos resultados dos jogos e quais seleções irão
+						passar para próxima fase. Verifique se não esqueceu nenhum palpite, você deve finalizar suas apostas até o
+						dia 13/06/2018.</p>
+
+					<p>Então, espero que todos se divirtam e BOA SORTE!</p>
+
+					<p><b>Total participantes cadastrados: #{inicioBean.totalParticipantes}</b></p>
+					<p><b>Total participantes ativos: #{inicioBean.totalParticipantesAtivos}</b></p>
+					<p><b>Total arrecadado: #{inicioBean.totalParticipantesAtivos*80}</b></p>
+				
+				</p:outputPanel>
+			</div>
+			<div class="col-4">
+				<p:dataGrid var="item" value="#{inicioBean.jogos}" columns="1"
+					rows="4" paginator="false" paginatorPosition="bottom">
+
+					<p:panel style="text-align:center;">
+						<f:facet name="header">
+							<h:outputText value="#{item.grupo.nome} - "
+								style="white-space: nowrap;" />
+							<h:outputText value="#{item.dtJogo}">
+								<f:convertDateTime id="convIni" type="date" pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</f:facet>
+						<h:panelGrid columns="5">
+
+							<h:graphicImage value="../img/#{item.selecao1.id}.png"
+								title="#{item.selecao1.nome}" />
+
+							<h:outputText value=" X " />
+
+							<h:graphicImage value="../img/#{item.selecao2.id}.png"
+								title="#{item.selecao2.nome}" />
+
+						</h:panelGrid>
+
+					</p:panel>
+				</p:dataGrid>
+			</div>
+		
+		</div>	
+
+		<!-- </h:form> -->
+
+	</ui:define>
+</ui:composition>
